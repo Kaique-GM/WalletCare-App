@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label text="Gestão Financeira" layoutX="220.0" layoutY="20.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <Button text="Adicionar Transação" layoutX="50.0" layoutY="80.0" prefWidth="150.0" />
+        <Button text="Visualizar Resumo" layoutX="230.0" layoutY="80.0" prefWidth="150.0" />
+        <Button text="Histórico de Transações" layoutX="410.0" layoutY="80.0" prefWidth="150.0" />
+        <TableView layoutX="50.0" layoutY="150.0" prefWidth="500.0" prefHeight="200.0">
+            <columns>
+                <TableColumn text="Descrição" prefWidth="200.0" />
+                <TableColumn text="Valor" prefWidth="150.0" />
+                <TableColumn text="Data" prefWidth="150.0" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
