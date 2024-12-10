@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.financeX.controllers.LoginController">
+    <children>
+        <Label text="Login" style="-fx-font-size: 24px; -fx-font-weight: bold;"
+            AnchorPane.topAnchor="20" AnchorPane.leftAnchor="120" />
+
+        <Label text="Username:" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="50" />
+        <TextField fx:id="usernameField" promptText="Enter your username" AnchorPane.topAnchor="100"
+            AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="50" />
+
+        <Label text="Password:" AnchorPane.topAnchor="160" AnchorPane.leftAnchor="50" />
+        <PasswordField fx:id="passwordField" promptText="Enter your password"
+            AnchorPane.topAnchor="180" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="50" />
+
+        <Button text="Login" fx:id="loginButton" onAction="#handleLogin" AnchorPane.topAnchor="250"
+            AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="50" />
+
+        <Label fx:id="errorMessage" text="" style="-fx-text-fill: red;" AnchorPane.topAnchor="220"
+            AnchorPane.leftAnchor="150" />
+    </children>
+</AnchorPane>
