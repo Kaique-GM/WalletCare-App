@@ -18,4 +18,18 @@ public class UserService {
             dao.update(obj);
         }*/
     }
+
+    public Boolean userExists (String string){
+        if (dao.findByUsername(string)) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean passwordMatches (String string){
+        if (dao.findByPassword(string)) {
+            return true;
+        }
+        return false;
+    }
 }

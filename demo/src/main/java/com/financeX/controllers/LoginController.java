@@ -1,46 +1,74 @@
 package com.financeX.controllers;
 
+import java.io.IOException;
+
+import com.financeX.services.UserService;
+import com.financeX.utils.Alerts;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 public class LoginController {
+
+    private UserService service = new UserService();
 
     @FXML
     private TextField usernameField;
 
     @FXML
-    private PasswordField passwordField;
+    private TextField passwordField;
 
     @FXML
-    private Label errorMessage;
+    Button loginButton;
 
-    // Método chamado ao clicar no botão de login
     @FXML
-    public void handleLogin() {
+    Button registerButton;
+
+    @FXML void onLogin(ActionEvent event){
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // Validação simples
-        if (username.isEmpty() || password.isEmpty()) {
-            errorMessage.setText("Please fill in both fields.");
-        } else {
-            // Aqui você pode adicionar a lógica para autenticar o usuário (consultar o banco, por exemplo)
-            // Para fins de exemplo, vamos assumir que o login é sempre bem-sucedido se os campos não estiverem vazios
-            if (username.equals("admin") && password.equals("admin123")) {
-                errorMessage.setText("Login successful!");
-                // Redirecionar para outra tela, por exemplo
-            } else {
-                errorMessage.setText("Invalid username or password.");
-            }
+        if (username.isBlank() || password.isBlank()) {
+            Alerts.showAlert("Error", null, "Os campos estão vazios", AlertType.ERROR);
+            return;
         }
-    }
 
-    // Método para limpar a mensagem de erro quando o usuário começa a digitar
-    @FXML
-    public void clearErrorMessage(KeyEvent event) {
-        errorMessage.setText("");
+        try{
+
+            Boolean userExists = service.userExists(username);
+            Boolean passwordMatches = service.passwordMatches(password);
+
+            if(userExists && passwordMatches){
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/financeX/views/Home.fxml"));
+                Scene homeScene = new Scene(fxmlLoader.load());
+
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+
+                stage.close();
+
+                Stage homeStage = new Stage();
+                homeStage.setScene(homeScene);
+                homeStage.show();
+            }
+            
+            else if(!userExists){
+                Alerts.showAlert("Error", null, "Usuário não encontrado", AlertType.ERROR);
+            return;
+            }
+            else if(!passwordMatches){
+                Alerts.showAlert("Error", null, "Senha incorreta", AlertType.ERROR);
+            return;
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error", AlertType.ERROR);
+
+        }
     }
 }
