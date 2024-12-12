@@ -20,7 +20,7 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public void insert(User obj) {
-        String sql = "INSER INTO users (username, password_hash) VALUES (?, ?)";
+        String sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
         PreparedStatement st = null;
 
         try {

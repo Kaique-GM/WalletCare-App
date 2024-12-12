@@ -12,6 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController {
@@ -22,7 +23,7 @@ public class LoginController {
     private TextField usernameField;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     Button loginButton;
@@ -30,22 +31,23 @@ public class LoginController {
     @FXML
     Button registerButton;
 
-    @FXML void onLogin(ActionEvent event){
+    @FXML
+    private void onLogin(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (username.isBlank() || password.isBlank()) {
-            Alerts.showAlert("Error", null, "Os campos estão vazios", AlertType.ERROR);
+            Alerts.showAlert("Error", null, "Fields cannot be empty", AlertType.ERROR);
             return;
         }
 
-        try{
+        try {
 
             Boolean userExists = service.userExists(username);
             Boolean passwordMatches = service.passwordMatches(password);
 
-            if(userExists && passwordMatches){
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/financeX/views/Home.fxml"));
+            if (userExists && passwordMatches) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
                 Scene homeScene = new Scene(fxmlLoader.load());
 
                 Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -56,19 +58,39 @@ public class LoginController {
                 homeStage.setScene(homeScene);
                 homeStage.show();
             }
-            
-            else if(!userExists){
-                Alerts.showAlert("Error", null, "Usuário não encontrado", AlertType.ERROR);
-            return;
+
+            else if (!userExists) {
+                Alerts.showAlert("Error", null, "User not found", AlertType.ERROR);
+                return;
+            } else if (!passwordMatches) {
+                Alerts.showAlert("Error", null, "Incorrect password", AlertType.ERROR);
+                return;
             }
-            else if(!passwordMatches){
-                Alerts.showAlert("Error", null, "Senha incorreta", AlertType.ERROR);
-            return;
-            }
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Error", AlertType.ERROR);
 
         }
+    }
+
+    @FXML
+    private void OnRegister(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/register.fxml"));
+            Scene registerScene = new Scene(fxmlLoader.load());
+
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+
+            stage.close();
+
+            Stage registerStage = new Stage();
+            registerStage.setScene(registerScene);
+            registerStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "An error occurred", AlertType.ERROR);
+        }
+
     }
 }
