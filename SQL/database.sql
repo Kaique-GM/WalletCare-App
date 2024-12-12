@@ -48,6 +48,81 @@ CREATE TABLE expenses (
     FOREIGN KEY (id_month) REFERENCES months(id_month), -- Link 'id_month' to the 'months' table
     FOREIGN KEY (id_category) REFERENCES categories(id_category) -- Link 'id_category' to the 'categories' table
 );
+-- TRIGGERS --
+
+-- Set the delimiter to '//' so we can use semicolons in the trigger body
+DELIMITER //
+
+-- Trigger to update the total_balance after a new income (INSERT) entry
+CREATE TRIGGER after_income_insert
+AFTER INSERT ON incomes
+FOR EACH ROW
+BEGIN
+    -- Update the total_balance in the 'months' table by adding the new income value
+    UPDATE months
+    SET total_balance = total_balance + NEW.value_i
+    WHERE id_month = NEW.id_month;
+END; //
+
+-- Trigger to update the total_balance after a new expense (INSERT) entry
+CREATE TRIGGER after_expense_insert
+AFTER INSERT ON expenses
+FOR EACH ROW
+BEGIN
+    -- Update the total_balance in the 'months' table by subtracting the new expense value
+    UPDATE months
+    SET total_balance = total_balance - NEW.value_e
+    WHERE id_month = NEW.id_month;
+END; //
+
+-- Trigger to update the total_balance after an income (DELETE) entry is removed
+CREATE TRIGGER after_income_delete
+AFTER DELETE ON incomes
+FOR EACH ROW
+BEGIN
+    -- Update the total_balance in the 'months' table by subtracting the deleted income value
+    UPDATE months
+    SET total_balance = total_balance - OLD.value_i
+    WHERE id_month = OLD.id_month;
+END; //
+
+-- Trigger to update the total_balance after an expense (DELETE) entry is removed
+CREATE TRIGGER after_expense_delete
+AFTER DELETE ON expenses
+FOR EACH ROW
+BEGIN
+    -- Update the total_balance in the 'months' table by adding back the deleted expense value
+    UPDATE months
+    SET total_balance = total_balance + OLD.value_e
+    WHERE id_month = OLD.id_month;
+END; //
+
+-- Trigger to update the total_balance after an income (UPDATE) entry is modified
+CREATE TRIGGER after_income_update
+AFTER UPDATE ON incomes
+FOR EACH ROW
+BEGIN
+    -- Update the total_balance in the 'months' table by adjusting for the old and new income values
+    UPDATE months
+    SET total_balance = total_balance - OLD.value_i + NEW.value_i
+    WHERE id_month = NEW.id_month;
+END; //
+
+-- Trigger to update the total_balance after an expense (UPDATE) entry is modified
+CREATE TRIGGER after_expense_update
+AFTER UPDATE ON expenses
+FOR EACH ROW
+BEGIN
+    -- Update the total_balance in the 'months' table by adjusting for the old and new expense values
+    UPDATE months
+    SET total_balance = total_balance + OLD.value_e - NEW.value_e
+    WHERE id_month = NEW.id_month;
+END; //
+
+-- Reset the delimiter to semicolon
+DELIMITER ;
+
+-- INTSERTS--
 
 -- Insert the categories into the 'categories' table
 INSERT INTO categories (category_name) 
@@ -61,4 +136,4 @@ VALUES ('Expense Fixed'); -- 'Expense Fixed' category for fixed expenses (e.g., 
 INSERT INTO categories (category_name) 
 VALUES ('Expense Variable'); -- 'Expense Variable' category for variable expenses (e.g., transport, entertainment)
 
-    
+

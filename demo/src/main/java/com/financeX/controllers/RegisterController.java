@@ -3,6 +3,7 @@ package com.financeX.controllers;
 import java.io.IOException;
 
 import com.financeX.model.entities.User;
+import com.financeX.services.MonthService;
 import com.financeX.services.UserService;
 import com.financeX.utils.Alerts;
 
@@ -19,6 +20,8 @@ import javafx.stage.Stage;
 public class RegisterController {
 
     UserService service = new UserService();
+    MonthService serviceM = new MonthService();
+
     @FXML
     private TextField usernameField;
 
@@ -51,6 +54,8 @@ public class RegisterController {
             user.setPassword(password);
 
             service.saveOrUpdate(user);
+            
+            serviceM.insert12Months(user);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
             Scene homeScene = new Scene(fxmlLoader.load());

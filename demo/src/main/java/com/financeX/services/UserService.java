@@ -6,7 +6,7 @@ import com.financeX.model.entities.User;
 
 public class UserService {
 
-    private UserDao dao = DaoFactory.creatUserDao();
+    private UserDao dao = DaoFactory.createUserDao();
 
     public void saveOrUpdate(User obj) {
         if (obj.getId() == null) {
