@@ -14,7 +14,7 @@ CREATE TABLE users(
 -- Create the 'months' table to store month data for each user
 CREATE TABLE months (
     id_month INT AUTO_INCREMENT PRIMARY KEY, -- 'id_month' is an auto-incrementing primary key
-    month_name VARCHAR(20) NOT NULL UNIQUE, -- 'month_name' stores the name of the month (e.g., 'January')
+    month_name VARCHAR(20) NOT NULL, -- 'month_name' stores the name of the month (e.g., 'January')
     yr INT NOT NULL, -- 'yr' stores the year (e.g., 2024)
     total_balance DECIMAL(10, 2), -- 'total_balance' stores the total balance for the month
     id_user INT NOT NULL, -- 'id_user' is the foreign key referencing the user associated with the month

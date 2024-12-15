@@ -44,7 +44,7 @@ public class LoginController {
         try {
 
             Boolean userExists = service.userExists(username);
-            Boolean passwordMatches = service.passwordMatches(password);
+            Boolean passwordMatches = service.passwordMatches(username, password);
 
             if (userExists && passwordMatches) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));

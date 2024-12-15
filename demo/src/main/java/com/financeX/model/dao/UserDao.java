@@ -7,5 +7,5 @@ public interface UserDao {
     void insert(User obj);
     User findById(Integer id);
     Boolean findByUsername(String string);
-    Boolean findByPassword(String string);
+    Boolean findByPassword(String username, String string);
 }

@@ -26,8 +26,8 @@ public class UserService {
         return false;
     }
 
-    public Boolean passwordMatches (String string){
-        if (dao.findByPassword(string)) {
+    public Boolean passwordMatches (String username, String string){
+        if (dao.findByPassword(username, string)) {
             return true;
         }
         return false;

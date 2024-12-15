@@ -110,19 +110,20 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public Boolean findByPassword(String string) {
+    public Boolean findByPassword(String username, String string) {
 
         if (string == null) {
             return false;
         }
 
-        String sql = "SELECT * FROM users WHERE password_hash = ?";
+        String sql = "SELECT * FROM users WHERE password_hash = ? and username = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
             st = conn.prepareStatement(sql);
             st.setString(1, string);
+            st.setString(2, username);
             rs = st.executeQuery();
 
             if (rs.next()) {
