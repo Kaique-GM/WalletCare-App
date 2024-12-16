@@ -10,7 +10,7 @@ public class UserService {
 
     public void saveOrUpdate(User obj) {
         if (obj.getId() == null) {
-            if (dao.findByUsername(obj.getUsername())) {
+            if (dao.existsByUsername(obj.getUsername())) {
                 throw new IllegalArgumentException("Username already exists: " + obj.getUsername());
             }
             dao.insert(obj);
@@ -20,16 +20,21 @@ public class UserService {
     }
 
     public Boolean userExists (String string){
-        if (dao.findByUsername(string)) {
+        if (dao.existsByUsername(string)) {
             return true;
         }
         return false;
     }
 
     public Boolean passwordMatches (String username, String string){
-        if (dao.findByPassword(username, string)) {
+        if (dao.existsByPassword(username, string)) {
             return true;
         }
         return false;
+    }
+
+    public Integer findIdByUsername(String username){
+        int id = dao.findIdByUsername(username);
+        return id;
     }
 }

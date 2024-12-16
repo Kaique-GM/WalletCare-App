@@ -81,13 +81,13 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public Boolean findByUsername(String string) {
+    public Boolean existsByUsername (String string) {
 
         if (string == null) {
             return false;
         }
 
-        String sql = "SELECT * FROM users WHERE username = ?";
+        String sql = "SELECT id FROM users WHERE username = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -110,13 +110,13 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public Boolean findByPassword(String username, String string) {
+    public Boolean existsByPassword(String username, String string) {
 
-        if (string == null) {
+        if (username == null || username.isBlank() || string == null || string.isBlank()) {
             return false;
         }
 
-        String sql = "SELECT * FROM users WHERE password_hash = ? and username = ?";
+        String sql = "SELECT id FROM users WHERE password_hash = ? and username = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -139,11 +139,41 @@ public class UserDaoJDBC implements UserDao {
         }
     }
 
+    @Override
+    public Integer findIdByUsername(String username) {
+        if (username == null) {
+            return null;
+        }
+
+        String sql = "SELECT id FROM users WHERE username = ?";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, username);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+            return null;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
     private User instantiateUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
         return user;
+
     }
+
 }

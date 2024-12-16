@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.financeX.services.UserService;
 import com.financeX.utils.Alerts;
+import com.financeX.utils.Session;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,6 +48,10 @@ public class LoginController {
             Boolean passwordMatches = service.passwordMatches(username, password);
 
             if (userExists && passwordMatches) {
+                Session session = Session.getInstance();
+                session.setUsername(username);
+                session.setUserID(service.findIdByUsername(username));
+
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
                 Scene homeScene = new Scene(fxmlLoader.load());
 
