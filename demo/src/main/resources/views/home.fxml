@@ -152,9 +152,9 @@
         </TabPane>
     </center>
    <top>
-      <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="☰" BorderPane.alignment="CENTER_RIGHT">
+      <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="☰" BorderPane.alignment="CENTER_RIGHT">
         <items>
-          <MenuItem mnemonicParsing="false" text="Logout" />
+          <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
         </items>
          <BorderPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="5.0" />

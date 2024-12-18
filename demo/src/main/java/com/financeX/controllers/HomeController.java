@@ -1,59 +1,53 @@
 package com.financeX.controllers;
 
+import java.io.IOException;
+
+import com.financeX.services.Session;
+import com.financeX.utils.Alerts;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 public class HomeController {
+    
+    @FXML
+    private MenuButton menuButton;
 
     @FXML
-    private TableView<Object> tableView;
+    private MenuItem logOutButton;
 
     @FXML
-    private TableColumn<Object, String> column1;
+    private void onLogout(ActionEvent event) {
+        Session.getInstance().clearSession();
 
-    @FXML
-    private TableColumn<Object, String> column2;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
 
-    @FXML
-    private TableColumn<Object, String> column3;
+            Stage stage = (Stage) menuButton.getScene().getWindow();
 
-    @FXML
-    private Button addButton;
+            stage.close();
 
-    @FXML
-    private Button editButton;
+            Stage loginStage = new Stage();
+            loginStage.setScene(loginScene);
+            loginStage.show();
 
-    @FXML
-    private Button deleteButton;
-
-    // Método para lidar com o botão de adicionar
-    @FXML
-    private void onAdd(ActionEvent event) {
-        System.out.println("Adicionar item");
-        // Lógica para adicionar um item na tabela
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error", AlertType.ERROR);
+        }
     }
 
-    // Método para lidar com o botão de editar
-    @FXML
-    private void onEdit(ActionEvent event) {
-        System.out.println("Editar item");
-        // Lógica para editar o item selecionado na tabela
-    }
-
-    // Método para lidar com o botão de deletar
-    @FXML
-    private void onDelete(ActionEvent event) {
-        System.out.println("Deletar item");
-        // Lógica para deletar o item selecionado na tabela
-    }
-
-    // Método para inicializar a tela, se necessário
     @FXML
     private void initialize() {
-        System.out.println("HomeController inicializado");
-        // Configuração inicial da tabela, se necessário
+        Session session = Session.getInstance();
+        int id = session.getUserID();
+        String username = session.getUsername();
     }
 }

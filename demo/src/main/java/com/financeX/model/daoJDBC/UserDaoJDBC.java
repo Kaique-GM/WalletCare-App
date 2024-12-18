@@ -1,4 +1,4 @@
-package com.financeX.model.dao.impl;
+package com.financeX.model.daoJDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,7 +1,7 @@
 package com.financeX.model.dao;
 
-import com.financeX.model.dao.impl.MonthDaoJDBC;
-import com.financeX.model.dao.impl.UserDaoJDBC;
+import com.financeX.model.daoJDBC.MonthDaoJDBC;
+import com.financeX.model.daoJDBC.UserDaoJDBC;
 import com.financeX.services.db.DB;
 
 public class DaoFactory {

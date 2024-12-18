@@ -32,10 +32,13 @@ CREATE TABLE incomes (
     id_income INT AUTO_INCREMENT PRIMARY KEY, -- 'id_income' is an auto-incrementing primary key
     description_i VARCHAR(50) NOT NULL, -- 'description_i' stores a description for the income (e.g., 'Salary')
     value_i DECIMAL(10, 2), -- 'value_i' stores the value of the income
+    income_date DATE, -- 'income_date' stores the date of the income entry
     id_month INT NOT NULL, -- 'id_month' is a foreign key referencing the 'months' table
     id_category INT NOT NULL, -- 'id_category' is a foreign key referencing the 'categories' table
+    id_user INT NOT NULL, -- 'id_user' links this entry to a specific user
     FOREIGN KEY (id_month) REFERENCES months(id_month), -- Link 'id_month' to the 'months' table
-    FOREIGN KEY (id_category) REFERENCES categories(id_category) -- Link 'id_category' to the 'categories' table
+    FOREIGN KEY (id_category) REFERENCES categories(id_category), -- Link 'id_category' to the 'categories' table
+    FOREIGN KEY (id_user) REFERENCES users(id) -- Link 'id_user' to the 'users' table
 );
 
 -- Create the 'expenses' table to store expense entries
@@ -43,11 +46,15 @@ CREATE TABLE expenses (
     id_expenses INT AUTO_INCREMENT PRIMARY KEY, -- 'id_expenses' is an auto-incrementing primary key
     description_e VARCHAR(50) NOT NULL, -- 'description_e' stores a description for the expense (e.g., 'Rent')
     value_e DECIMAL(10, 2), -- 'value_e' stores the value of the expense
+    expenses_date DATE, -- 'income_date' stores the date of the expenses
     id_month INT NOT NULL, -- 'id_month' is a foreign key referencing the 'months' table
     id_category INT NOT NULL, -- 'id_category' is a foreign key referencing the 'categories' table
+    id_user INT NOT NULL, -- 'id_user' links this entry to a specific user
     FOREIGN KEY (id_month) REFERENCES months(id_month), -- Link 'id_month' to the 'months' table
-    FOREIGN KEY (id_category) REFERENCES categories(id_category) -- Link 'id_category' to the 'categories' table
+    FOREIGN KEY (id_category) REFERENCES categories(id_category), -- Link 'id_category' to the 'categories' table
+    FOREIGN KEY (id_user) REFERENCES users(id) -- Link 'id_user' to the 'users' table
 );
+
 -- TRIGGERS --
 
 -- Set the delimiter to '//' so we can use semicolons in the trigger body

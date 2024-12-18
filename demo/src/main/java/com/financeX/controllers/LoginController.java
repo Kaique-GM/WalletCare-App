@@ -2,9 +2,9 @@ package com.financeX.controllers;
 
 import java.io.IOException;
 
+import com.financeX.services.Session;
 import com.financeX.services.UserService;
 import com.financeX.utils.Alerts;
-import com.financeX.utils.Session;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,10 +27,10 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    Button loginButton;
+    private Button loginButton;
 
     @FXML
-    Button registerButton;
+    private Button registerButton;
 
     @FXML
     private void onLogin(ActionEvent event) {

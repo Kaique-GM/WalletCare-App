@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.financeX.model.entities.User;
 import com.financeX.services.MonthService;
+import com.financeX.services.Session;
 import com.financeX.services.UserService;
 import com.financeX.utils.Alerts;
 
@@ -29,7 +30,7 @@ public class RegisterController {
     private PasswordField passwordField;
 
     @FXML
-    Button registerButton;
+    private Button registerButton;
 
     @FXML
     private void OnRegister(ActionEvent event) {
@@ -53,8 +54,12 @@ public class RegisterController {
             user.setUsername(username);
             user.setPassword(password);
 
+            Session session = Session.getInstance();
+            session.setUsername(username);
+            session.setUserID(service.findIdByUsername(username));
+
             service.saveOrUpdate(user);
-            
+
             serviceM.insert12Months(user);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
