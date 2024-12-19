@@ -14,27 +14,33 @@ public class UserService {
                 throw new IllegalArgumentException("Username already exists: " + obj.getUsername());
             }
             dao.insert(obj);
-        } /*else {
-            dao.update(obj);
-        }*/
+        } /*
+           * else {
+           * dao.update(obj);
+           * }
+           */
     }
 
-    public Boolean userExists (String string){
+    public Boolean userExists(String string) {
         if (dao.existsByUsername(string)) {
             return true;
         }
         return false;
     }
 
-    public Boolean passwordMatches (String username, String string){
+    public Boolean passwordMatches(String username, String string) {
         if (dao.existsByPassword(username, string)) {
             return true;
         }
         return false;
     }
 
-    public Integer findIdByUsername(String username){
+    public Integer findIdByUsername(String username) {
         int id = dao.findIdByUsername(username);
         return id;
+    }
+
+    public void insert12Months(User obj) {
+        dao.insert12Months(obj);
     }
 }

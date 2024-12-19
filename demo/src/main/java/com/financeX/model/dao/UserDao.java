@@ -9,4 +9,5 @@ public interface UserDao {
     Boolean existsByUsername(String string);
     Boolean existsByPassword(String username, String string);
     Integer findIdByUsername(String username);
+    void insert12Months(User obj);
 }

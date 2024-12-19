@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import com.financeX.model.dao.UserDao;
 import com.financeX.model.entities.User;
@@ -165,6 +166,37 @@ public class UserDaoJDBC implements UserDao {
             DB.closeStatement(st);
             DB.closeResultSet(rs);
         }
+    }
+
+    @Override
+    public void insert12Months(User obj) {
+
+        PreparedStatement st = null;
+        String sql = "INSERT INTO months (month_name, yr, id_user) VALUES (?, ?, ?)";
+
+        int user_id = obj.getId();
+        int year = LocalDate.now().getYear();
+        String months[] = { "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December" };
+
+        try {
+            for (String month : months) {
+                st = conn.prepareStatement(sql);
+
+                st.setString(1, month);
+                st.setInt(2, year);
+                st.setInt(3, user_id);
+
+                st.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+
+        } finally {
+            DB.closeStatement(st);
+        }
+
     }
 
     private User instantiateUser(ResultSet rs) throws SQLException {

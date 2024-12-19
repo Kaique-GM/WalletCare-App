@@ -8,8 +8,7 @@ public class MonthService {
 
     private MonthDao dao = DaoFactory.createMonthDao();
 
-    public void insert12Months(User obj){
-       dao.insert12Months(obj);
-        
+    public Integer getMonthId(String monthName, Integer year, Integer userId){
+        return dao.getMonthId(monthName, year, userId);
     }
 }

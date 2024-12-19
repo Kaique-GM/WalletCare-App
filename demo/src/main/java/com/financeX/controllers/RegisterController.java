@@ -60,7 +60,7 @@ public class RegisterController {
 
             service.saveOrUpdate(user);
 
-            serviceM.insert12Months(user);
+            service.insert12Months(user);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
             Scene homeScene = new Scene(fxmlLoader.load());
