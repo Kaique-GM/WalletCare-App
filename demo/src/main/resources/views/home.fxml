@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -14,6 +13,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -291,16 +291,25 @@
         </TabPane>
     </center>
    <top>
-      <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="☰" BorderPane.alignment="CENTER_RIGHT">
-        <items>
-          <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
-        </items>
-         <BorderPane.margin>
-            <Insets bottom="3.0" left="3.0" right="3.0" top="5.0" />
-         </BorderPane.margin>
-         <graphic>
-            <Label fx:id="labelMessage" text="Label" />
-         </graphic>
-      </MenuButton>
+      <HBox prefHeight="38.0" prefWidth="990.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="38.0" prefWidth="1273.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <MenuButton fx:id="menuButton1" layoutX="895.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="☰" AnchorPane.rightAnchor="13.0">
+                     <items>
+                        <MenuItem fx:id="logOutButton2" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+                     </items>
+                  </MenuButton>
+                  <MenuButton fx:id="menuYearButton" layoutX="7.2" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Year" AnchorPane.leftAnchor="7.0">
+                    <items>
+                      <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#onYearSelected" text="2024" />
+                        <MenuItem fx:id="logOutButton1" mnemonicParsing="false" onAction="#onYearSelected" text="2025" />
+                    </items>
+                  </MenuButton>
+                  <Label fx:id="labelYear" layoutX="80.0" layoutY="6.0" prefHeight="26.0" prefWidth="37.0" style="-fx-font-size: 16px;" text="Year" AnchorPane.leftAnchor="80.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
    </top>
 </BorderPane>

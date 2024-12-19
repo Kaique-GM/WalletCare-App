@@ -19,6 +19,7 @@ public class addEntriesController {
     private MonthService service2 = new MonthService();
     private String currentMonth;
     private Session session;
+    private Integer year;
 
     @FXML
     private TextField descriptionField;
@@ -40,19 +41,23 @@ public class addEntriesController {
         this.session = session;
     }
 
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
     @FXML
-    public void OnConfirm(ActionEvent event){
+    public void OnConfirm(ActionEvent event) {
         Income income = new Income();
         System.out.println(this.currentMonth);
 
         income.setDescription(descriptionField.getText());
         income.setValue(new BigDecimal(valueField.getText()));
-        int userId =session.getUserID();
-        int monthId = service2.getMonthId(this.currentMonth, 2024, userId);
+        int userId = session.getUserID();
+        int monthId = service2.getMonthId(this.currentMonth, this.year, userId);
         income.setId_user(userId);
         income.setId_month(monthId);
         income.setDate(new java.util.Date());
-        
+
         service.insert(userId, monthId, income);
 
         Stage stage = (Stage) confirmButton.getScene().getWindow();

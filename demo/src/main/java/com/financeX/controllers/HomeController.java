@@ -1,6 +1,7 @@
 package com.financeX.controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
@@ -20,11 +21,19 @@ import javafx.stage.Stage;
 
 public class HomeController {
 
+    private int year;
+
     @FXML
     private TabPane tabPane;
 
     @FXML
+    private Label labelYear;
+
+    @FXML
     private MenuButton menuButton;
+
+    @FXML 
+    private MenuButton menuYearButton;
 
     @FXML
     private MenuItem logOutButton;
@@ -45,6 +54,7 @@ public class HomeController {
             Scene newScene = new Scene(fxmlLoader.load());
 
             addController = fxmlLoader.getController();
+            addController.setYear(year);
             addController.setCurrentMonth(currentMonth);
             addController.setSession(Session.getInstance());
 
@@ -83,10 +93,25 @@ public class HomeController {
     }
 
     @FXML
-    private void initialize() {
+    public void onYearSelected(ActionEvent event){
+        MenuItem selectedItem = (MenuItem) event.getSource();
+        String selectedYearText = selectedItem.getText();
 
+        try{
+            year = Integer.parseInt(selectedYearText);
+            labelYear.setText("" + year);
+        }catch(NumberFormatException e){
+            Alerts.showAlert("Error", null, "Invalid year selected", AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void initialize() {
         Session session = Session.getInstance();
         int user_id = session.getUserID();
         String username = session.getUsername();
+
+        year = LocalDate.now().getYear();
+        labelYear.setText("" + year);
     }
 }
