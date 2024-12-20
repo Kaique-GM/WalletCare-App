@@ -60,7 +60,7 @@ public class UpdateEntriesController {
             int userId = session.getUserID();
             service.update(userId, income, incomeId);
 
-            Alerts.showAlert("Success", null, "Income entry successfully updated.", AlertType.INFORMATION);
+            Alerts.showAlert("Success", null, "Income successfully updated.", AlertType.INFORMATION);
 
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();

@@ -56,21 +56,21 @@ public class ExpenseDaoJDBC implements ExpenseDao {
     }
 
     @Override
-    public void delete(Integer userId, Integer Expense_id) {
-        // String sql = "DELETE FROM incomes WHERE id_income = ? AND id_user = ? ";
-        // PreparedStatement st = null;
+    public void delete(Integer userId, Integer id_expenses) {
+        String sql = "DELETE FROM expenses WHERE id_expenses = ? AND id_user = ? ";
+        PreparedStatement st = null;
 
-        // try {
-        //     st = conn.prepareStatement(sql);
-        //     st.setInt(1, income_id);
-        //     st.setInt(2, userId);
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id_expenses);
+            st.setInt(2, userId);
 
-        //     st.executeUpdate();
-        // } catch (SQLException e) {
-        //     throw new DbException(e.getMessage());
-        // } finally {
-        //     DB.closeStatement(st);
-        // }
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

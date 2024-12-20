@@ -7,6 +7,7 @@ import com.financeX.controllers.Entries.AddEntriesController;
 import com.financeX.controllers.Entries.RemoveEntriesController;
 import com.financeX.controllers.Entries.UpdateEntriesController;
 import com.financeX.controllers.Expenses.AddFixedExpensesController;
+import com.financeX.controllers.Expenses.RemoveFixedExpensesController;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
@@ -66,11 +67,11 @@ public class HomeController {
     }
 
     @FXML
-    private void onAddFixedExpense(ActionEvent event){
+    private void onAddFixedExpense(ActionEvent event) {
         String currentMonth = tabPane.getSelectionModel().getSelectedItem().getText();
         AddFixedExpensesController addFixedExpensesController;
 
-        try{
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/addFixedExpense.fxml"));
             Scene newScene = new Scene(fxmlLoader.load());
 
@@ -111,6 +112,29 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Error loading the remove incomes screen", AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void onRemoveFixedExpense(ActionEvent event) {
+        RemoveFixedExpensesController removeFixedExpensesController;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeFixedExpense.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load());
+
+            removeFixedExpensesController = fxmlLoader.getController();
+            removeFixedExpensesController.setSession(Session.getInstance());
+
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setScene(newScene);
+            newStage.setTitle("Remove Fixed Expense");
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error loading the remove fixed Expense screen", AlertType.ERROR);
         }
     }
 

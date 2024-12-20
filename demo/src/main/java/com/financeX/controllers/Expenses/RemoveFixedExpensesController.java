@@ -1,6 +1,6 @@
-package com.financeX.controllers.Entries;
+package com.financeX.controllers.Expenses;
 
-import com.financeX.services.IncomeService;
+import com.financeX.services.ExpenseService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
@@ -11,13 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class RemoveEntriesController {
+public class RemoveFixedExpensesController {
 
-    private IncomeService service = new IncomeService();
+    private ExpenseService service = new ExpenseService();
     private Session session;
 
     @FXML
-    private TextField incomeIdField;
+    private TextField expenseIdField;
 
     @FXML
     private Button confirmButton;
@@ -32,26 +32,26 @@ public class RemoveEntriesController {
     @FXML
     public void onConfirm(ActionEvent event) {
         try {
-            String incomeIdText = incomeIdField.getText().trim();
-            if (incomeIdText.isEmpty()) {
-                throw new IllegalArgumentException("Income ID cannot be empty.");
+            String expenseIdText = expenseIdField.getText().trim();
+            if (expenseIdText.isEmpty()) {
+                throw new IllegalArgumentException("Expense ID cannot be empty.");
             }
 
             int userId = session.getUserID();
-            int income_id = Integer.parseInt(incomeIdText);
+            int expense_id = Integer.parseInt(expenseIdText);
 
-            service.delete(userId, income_id);
+            service.delete(userId, expense_id);
 
-            Alerts.showAlert("Success", null, "Income successfully removed.", AlertType.INFORMATION);
+            Alerts.showAlert("Success", null, "Expense successfully removed.", AlertType.INFORMATION);
             
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            Alerts.showAlert("Invalid Input", null, "Income ID must be a valid number.", AlertType.ERROR);
+            Alerts.showAlert("Invalid Input", null, "Expense ID must be a valid number.", AlertType.ERROR);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            Alerts.showAlert("Invalid Input", null, "Income ID cannot be empty.", AlertType.ERROR);
+            Alerts.showAlert("Invalid Input", null, "Expense ID cannot be empty.", AlertType.ERROR);
         } catch (Exception e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "An unexpected error occurred.", AlertType.ERROR);
