@@ -1,4 +1,4 @@
-package com.financeX.controllers;
+package com.financeX.controllers.Entries;
 
 import com.financeX.services.IncomeService;
 import com.financeX.services.Session;
@@ -43,6 +43,8 @@ public class RemoveEntriesController {
 
             service.delete(userId, income_id);
 
+            Alerts.showAlert("Success", null, "Income entry successfully removed.", AlertType.INFORMATION);
+            
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {

@@ -59,23 +59,40 @@ public class IncomeDaoJDBC implements IncomeDao {
         String sql = "DELETE FROM incomes WHERE id_income = ? AND id_user = ? ";
         PreparedStatement st = null;
 
-        try{
+        try {
             st = conn.prepareStatement(sql);
             st.setInt(1, income_id);
             st.setInt(2, userId);
 
             st.executeUpdate();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new DbException(e.getMessage());
-        }finally{
+        } finally {
             DB.closeStatement(st);
         }
     }
 
     @Override
-    public void update(Integer userId, Income obj) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update(Integer userId, Income obj, Integer income_id) {
+        String sql = "UPDATE incomes SET description_i = ?, value_i = ?, income_date = ? WHERE id_income = ? AND id_user = ?";
+        PreparedStatement st = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, obj.getDescription());
+            st.setBigDecimal(2, obj.getValue());
+            st.setDate(3, new java.sql.Date(obj.getDate().getTime()));
+            st.setInt(4, income_id);
+            st.setInt(5, userId);
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
+
     }
 
 }

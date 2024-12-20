@@ -7,6 +7,6 @@ public interface IncomeDao {
 
     void delete(Integer userId, Integer income_id);
 
-    void update(Integer userId, Income obj);
+    void update(Integer userId, Income obj,Integer income_id);
 
 }

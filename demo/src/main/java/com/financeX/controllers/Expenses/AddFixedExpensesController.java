@@ -1,9 +1,9 @@
-package com.financeX.controllers;
+package com.financeX.controllers.Expenses;
 
 import java.math.BigDecimal;
 
-import com.financeX.model.entities.Income;
-import com.financeX.services.IncomeService;
+import com.financeX.model.entities.Expenses;
+import com.financeX.services.ExpenseService;
 import com.financeX.services.MonthService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
@@ -15,9 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddEntriesController {
+public class AddFixedExpensesController {
 
-    private IncomeService service = new IncomeService();
+    private ExpenseService service = new ExpenseService();
     private MonthService service2 = new MonthService();
     private String currentMonth;
     private Session session;
@@ -68,21 +68,25 @@ public class AddEntriesController {
                 throw new IllegalArgumentException("Value must be a valid number.");
             }
 
-            Income income = new Income();
-            income.setDescription(description);
-            income.setValue(value);
+            Expenses expense = new Expenses();
+            expense.setDescription(description);
+            expense.setValue(value);
 
             int userId = session.getUserID();
             int monthId = service2.getMonthId(this.currentMonth, this.year, userId);
 
-            income.setId_user(userId);
-            income.setId_month(monthId);
-            income.setDate(new java.util.Date());
+            expense.setId_user(userId);
+            expense.setId_month(monthId);
+            expense.setDate(new java.util.Date());
+            int category = 2;
 
-            service.insert(userId, monthId, income);
+            service.insert(userId, monthId, expense, category);
+
+            Alerts.showAlert("Success", null, "Expense entry successfully added.", AlertType.INFORMATION);
 
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();
+
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             Alerts.showAlert("Invalid Input", null, e.getMessage(), AlertType.ERROR);

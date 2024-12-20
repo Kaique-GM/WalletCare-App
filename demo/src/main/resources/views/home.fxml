@@ -73,8 +73,8 @@
                                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                             <Label style="-fx-font-size: 14px;" text="Manage Entries" />
                                             <Button fx:id="btnAddEntry" onAction="#onAddEntries" text="Add" />
-                                            <Button fx:id="btnRemoveEntry" onAction="#onRemove" text="Remove" />
-                                            <Button fx:id="btnEditEntry" text="Edit" />
+                                            <Button fx:id="btnRemoveEntry" onAction="#onRemoveEntries" text="Remove" />
+                                            <Button fx:id="btnEditEntry" onAction="#onUpdateEntries" text="Edit" />
                                         </HBox>
                                     </top>
                                     <center>
@@ -100,7 +100,7 @@
                                     <top>
                                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                             <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
-                                            <Button fx:id="btnAddFixedExpense" text="Add" />
+                                            <Button fx:id="btnAddFixedExpense" onAction="#onAddFixedExpense" text="Add" />
                                             <Button fx:id="btnRemoveFixedExpense" text="Remove" />
                                             <Button fx:id="btnEditFixedExpense" text="Edit" />
                                         </HBox>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="239.0" prefWidth="284.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.AddEntriesController">
+<VBox alignment="CENTER" prefHeight="239.0" prefWidth="284.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.Entries.AddEntriesController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>

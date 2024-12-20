@@ -1,5 +1,6 @@
 package com.financeX.model.dao;
 
+import com.financeX.model.daoJDBC.ExpenseDaoJDBC;
 import com.financeX.model.daoJDBC.IncomeDaoJDBC;
 import com.financeX.model.daoJDBC.MonthDaoJDBC;
 import com.financeX.model.daoJDBC.UserDaoJDBC;
@@ -17,5 +18,9 @@ public class DaoFactory {
 
     public static IncomeDao createIncomeDao() {
         return new IncomeDaoJDBC(DB.getConnection());
+    };
+
+    public static ExpenseDao createExpenseDao() {
+        return new ExpenseDaoJDBC(DB.getConnection());
     };
 }

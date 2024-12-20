@@ -5,5 +5,7 @@ module com.financeX {
 
     opens com.financeX to javafx.fxml;
     opens com.financeX.controllers to javafx.fxml;
+    opens com.financeX.controllers.Entries to javafx.fxml;
+    opens com.financeX.controllers.Expenses to javafx.fxml;
     exports com.financeX;
 }

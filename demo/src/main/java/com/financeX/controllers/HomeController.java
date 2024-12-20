@@ -3,6 +3,10 @@ package com.financeX.controllers;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import com.financeX.controllers.Entries.AddEntriesController;
+import com.financeX.controllers.Entries.RemoveEntriesController;
+import com.financeX.controllers.Entries.UpdateEntriesController;
+import com.financeX.controllers.Expenses.AddFixedExpensesController;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
@@ -57,30 +61,79 @@ public class HomeController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the add screen", AlertType.ERROR);
+            Alerts.showAlert("Error", null, "Error loading the add incomes screen", AlertType.ERROR);
         }
     }
 
     @FXML
-    private void onRemove(ActionEvent event) {
-        RemoveEntriesController removeEntriesController;
+    private void onAddFixedExpense(ActionEvent event){
+        String currentMonth = tabPane.getSelectionModel().getSelectedItem().getText();
+        AddFixedExpensesController addFixedExpensesController;
+
         try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeEntries.fxml"));
-        Scene newScene = new Scene(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/addFixedExpense.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load());
 
-        removeEntriesController = fxmlLoader.getController();
-        removeEntriesController.setSession(Session.getInstance());
+            addFixedExpensesController = fxmlLoader.getController();
+            addFixedExpensesController.setYear(year);
+            addFixedExpensesController.setCurrentMonth(currentMonth);
+            addFixedExpensesController.setSession(Session.getInstance());
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setScene(newScene);
+            newStage.setTitle("Add Fixed Expenses");
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.show();
 
-        Stage newStage = new Stage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error loading the add fixed expenses screen", AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void onRemoveEntries(ActionEvent event) {
+        RemoveEntriesController removeEntriesController;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeEntries.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load());
+
+            removeEntriesController = fxmlLoader.getController();
+            removeEntriesController.setSession(Session.getInstance());
+
+            Stage newStage = new Stage();
             newStage.setScene(newScene);
             newStage.setScene(newScene);
             newStage.setTitle("Remove Entries");
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.show();
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the remove screen", AlertType.ERROR);
+            Alerts.showAlert("Error", null, "Error loading the remove incomes screen", AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void onUpdateEntries(ActionEvent event) {
+        UpdateEntriesController updateEntriesController;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/updateEntries.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load());
+
+            updateEntriesController = fxmlLoader.getController();
+            updateEntriesController.setSession(Session.getInstance());
+
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setScene(newScene);
+            newStage.setTitle("Edit Entries");
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error loading the edit incomes screen", AlertType.ERROR);
         }
     }
 
