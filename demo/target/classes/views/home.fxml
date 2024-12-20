@@ -73,7 +73,7 @@
                                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                             <Label style="-fx-font-size: 14px;" text="Manage Entries" />
                                             <Button fx:id="btnAddEntry" onAction="#onAddEntries" text="Add" />
-                                            <Button fx:id="btnRemoveEntry" text="Remove" />
+                                            <Button fx:id="btnRemoveEntry" onAction="#onRemove" text="Remove" />
                                             <Button fx:id="btnEditEntry" text="Edit" />
                                         </HBox>
                                     </top>
@@ -295,7 +295,7 @@
          <children>
             <AnchorPane prefHeight="38.0" prefWidth="1273.0" HBox.hgrow="ALWAYS">
                <children>
-                  <MenuButton fx:id="menuButton1" layoutX="895.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="☰" AnchorPane.rightAnchor="13.0">
+                  <MenuButton fx:id="menuButton" layoutX="895.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="☰" AnchorPane.rightAnchor="13.0">
                      <items>
                         <MenuItem fx:id="logOutButton2" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
                      </items>

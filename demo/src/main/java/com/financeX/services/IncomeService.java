@@ -11,4 +11,8 @@ public class IncomeService {
     public void insert(Integer userId, Integer monthId, Income obj) {
         dao.insert(userId, monthId, obj);
     }
+
+    public void delete(Integer userId, Integer income_id){
+        dao.delete(userId, income_id);
+    }
 }

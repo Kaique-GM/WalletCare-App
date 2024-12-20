@@ -5,21 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.financeX.model.dao.IncomeDao;
-import com.financeX.model.entities.Income;
+import com.financeX.model.dao.ExpenseDao;
+import com.financeX.model.entities.Expenses;
 import com.financeX.services.db.DB;
 import com.financeX.services.db.DbException;
 
-public class IncomeDaoJDBC implements IncomeDao {
+public class ExpenseDaoJDBC implements ExpenseDao {
 
     private Connection conn;
 
-    public IncomeDaoJDBC(Connection conn) {
+    public ExpenseDaoJDBC(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void insert(Integer userId, Integer monthId, Income obj) {
+    public void insert(Integer userId, Integer monthId, Expenses obj) {
         String sql = "INSERT INTO incomes (description_i, value_i, income_date, id_month, id_category, id_user) VALUES (?, ?, ? , ?, ?, ?)";
 
         PreparedStatement st = null;
@@ -55,27 +55,21 @@ public class IncomeDaoJDBC implements IncomeDao {
     }
 
     @Override
-    public void delete(Integer userId, Integer income_id) {
-        String sql = "DELETE FROM incomes WHERE id_income = ? AND id_user = ? ";
-        PreparedStatement st = null;
-
-        try{
-            st = conn.prepareStatement(sql);
-            st.setInt(1, income_id);
-            st.setInt(2, userId);
-
-            st.executeUpdate();
-        }catch(SQLException e){
-            throw new DbException(e.getMessage());
-        }finally{
-            DB.closeStatement(st);
-        }
+    public void delete(Integer userId, Expenses obj) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
     @Override
-    public void update(Integer userId, Income obj) {
+    public void update(Integer userId, Expenses obj) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    @Override
+    public Expenses findById(Integer id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
 }

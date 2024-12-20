@@ -6,14 +6,16 @@ import com.financeX.model.entities.Income;
 import com.financeX.services.IncomeService;
 import com.financeX.services.MonthService;
 import com.financeX.services.Session;
+import com.financeX.utils.Alerts;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class addEntriesController {
+public class AddEntriesController {
 
     private IncomeService service = new IncomeService();
     private MonthService service2 = new MonthService();
@@ -46,25 +48,52 @@ public class addEntriesController {
     }
 
     @FXML
-    public void OnConfirm(ActionEvent event) {
-        Income income = new Income();
+    public void onConfirm(ActionEvent event) {
+        try {
+            String description = descriptionField.getText().trim();
+            String valueText = valueField.getText().trim();
 
-        income.setDescription(descriptionField.getText());
-        income.setValue(new BigDecimal(valueField.getText()));
-        int userId = session.getUserID();
-        int monthId = service2.getMonthId(this.currentMonth, this.year, userId);
-        income.setId_user(userId);
-        income.setId_month(monthId);
-        income.setDate(new java.util.Date());
+            if (description.isEmpty()) {
+                throw new IllegalArgumentException("Description cannot be empty.");
+            }
 
-        service.insert(userId, monthId, income);
+            if (valueText.isEmpty()) {
+                throw new IllegalArgumentException("Value cannot be empty.");
+            }
 
-        Stage stage = (Stage) confirmButton.getScene().getWindow();
-        stage.close();
+            BigDecimal value;
+            try {
+                value = new BigDecimal(valueText);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Value must be a valid number.");
+            }
+
+            Income income = new Income();
+            income.setDescription(description);
+            income.setValue(value);
+
+            int userId = session.getUserID();
+            int monthId = service2.getMonthId(this.currentMonth, this.year, userId);
+
+            income.setId_user(userId);
+            income.setId_month(monthId);
+            income.setDate(new java.util.Date());
+
+            service.insert(userId, monthId, income);
+
+            Stage stage = (Stage) confirmButton.getScene().getWindow();
+            stage.close();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Invalid Input", null, e.getMessage(), AlertType.ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", "An unexpected error occurred.", e.getMessage(), AlertType.ERROR);
+        }
     }
 
     @FXML
-    public void Oncancel(ActionEvent event) {
+    public void onCancel(ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
