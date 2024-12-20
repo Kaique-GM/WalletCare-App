@@ -6,10 +6,10 @@ public class User {
     private String username;
     private String password;
 
-    public User(){
-        
+    public User() {
+
     }
-    
+
     public User(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
@@ -65,5 +65,4 @@ public class User {
         return true;
     }
 
-    
 }

@@ -12,7 +12,7 @@ public class Income {
    private Integer id_category;
    private Integer id_user;
 
-   public Income(){
+   public Income() {
 
    }
 
@@ -107,7 +107,5 @@ public class Income {
          return false;
       return true;
    }
-
-   
 
 }

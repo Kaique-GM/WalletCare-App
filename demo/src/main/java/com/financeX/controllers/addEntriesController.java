@@ -48,7 +48,6 @@ public class addEntriesController {
     @FXML
     public void OnConfirm(ActionEvent event) {
         Income income = new Income();
-        System.out.println(this.currentMonth);
 
         income.setDescription(descriptionField.getText());
         income.setValue(new BigDecimal(valueField.getText()));

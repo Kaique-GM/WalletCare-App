@@ -6,12 +6,12 @@ public class Session {
     private String username;
     private Integer userID;
 
-    private Session(){
+    private Session() {
 
     }
 
-    public static Session getInstance(){
-        if(instance == null){
+    public static Session getInstance() {
+        if (instance == null) {
             instance = new Session();
         }
         return instance;
@@ -33,7 +33,7 @@ public class Session {
         this.userID = userID;
     }
 
-    public void clearSession(){
+    public void clearSession() {
         username = null;
         userID = 0;
     }

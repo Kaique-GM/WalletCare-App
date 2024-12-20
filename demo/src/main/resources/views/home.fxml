@@ -191,7 +191,7 @@
                                              <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                                 <children>
                                                    <Label style="-fx-font-size: 14px;" text="Manage Entries" />
-                                                   <Button fx:id="btnAddEntry1" text="Add" />
+                                                   <Button fx:id="btnAddEntry1" onAction="#onAddEntries" text="Add" />
                                                    <Button fx:id="btnRemoveEntry1" text="Remove" />
                                                    <Button fx:id="btnEditEntry1" text="Edit" />
                                                 </children>
@@ -307,6 +307,7 @@
                     </items>
                   </MenuButton>
                   <Label fx:id="labelYear" layoutX="80.0" layoutY="6.0" prefHeight="26.0" prefWidth="37.0" style="-fx-font-size: 16px;" text="Year" AnchorPane.leftAnchor="80.0" />
+                  <Label fx:id="labelUser" layoutX="902.0" layoutY="6.0" prefHeight="26.0" prefWidth="50.0" style="-fx-font-size: 16px;" text="User" AnchorPane.rightAnchor="68.39999999999995" />
                </children>
             </AnchorPane>
          </children>

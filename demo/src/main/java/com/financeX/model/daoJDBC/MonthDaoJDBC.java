@@ -19,11 +19,6 @@ public class MonthDaoJDBC implements MonthDao {
 
     @Override
     public Integer getMonthId(String monthName, Integer year, Integer userId) {
-
-        if (monthName.isBlank() || year == null || userId == null) {
-            return null;
-        }
-        
         String sql = "SELECT id_month FROM months WHERE month_name = ? AND yr = ? AND id_user = ?";
         PreparedStatement st = null;
         ResultSet rs = null;

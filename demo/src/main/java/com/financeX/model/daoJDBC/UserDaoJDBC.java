@@ -54,10 +54,6 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public User findById(Integer id) {
-        if (id == null || id < 0) {
-            return null;
-        }
-
         String sql = "SELECT * FROM users WHERE id = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -82,12 +78,7 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public Boolean existsByUsername (String string) {
-
-        if (string == null) {
-            return false;
-        }
-
+    public Boolean existsByUsername(String string) {
         String sql = "SELECT id FROM users WHERE username = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -112,11 +103,6 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public Boolean existsByPassword(String username, String string) {
-
-        if (username == null || username.isBlank() || string == null || string.isBlank()) {
-            return false;
-        }
-
         String sql = "SELECT id FROM users WHERE password_hash = ? and username = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -142,10 +128,6 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public Integer findIdByUsername(String username) {
-        if (username == null) {
-            return null;
-        }
-
         String sql = "SELECT id FROM users WHERE username = ?";
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -170,7 +152,6 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public void insert12Months(User obj) {
-
         PreparedStatement st = null;
         String sql = "INSERT INTO months (month_name, yr, id_user) VALUES (?, ?, ?)";
 

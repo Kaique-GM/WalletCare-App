@@ -30,19 +30,10 @@ public class HomeController {
     private Label labelYear;
 
     @FXML
+    private Label labelUser;
+
+    @FXML
     private MenuButton menuButton;
-
-    @FXML 
-    private MenuButton menuYearButton;
-
-    @FXML
-    private MenuItem logOutButton;
-
-    @FXML
-    private Label labelMessage;
-
-    @FXML
-    private Button btnAddEntry;
 
     @FXML
     private void onAddEntries(ActionEvent event) {
@@ -61,9 +52,10 @@ public class HomeController {
             Stage newStage = new Stage();
             newStage.setScene(newScene);
             newStage.setScene(newScene);
-            newStage.setTitle("Add Entries"); 
+            newStage.setTitle("Add Entries");
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Error loading the add screen", AlertType.ERROR);
@@ -88,19 +80,19 @@ public class HomeController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error", AlertType.ERROR);
+            Alerts.showAlert("Error", null, "Error loading the Login screen", AlertType.ERROR);
         }
     }
 
     @FXML
-    public void onYearSelected(ActionEvent event){
+    public void onYearSelected(ActionEvent event) {
         MenuItem selectedItem = (MenuItem) event.getSource();
         String selectedYearText = selectedItem.getText();
 
-        try{
+        try {
             year = Integer.parseInt(selectedYearText);
             labelYear.setText("" + year);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             Alerts.showAlert("Error", null, "Invalid year selected", AlertType.ERROR);
         }
     }
@@ -113,5 +105,6 @@ public class HomeController {
 
         year = LocalDate.now().getYear();
         labelYear.setText("" + year);
+        labelUser.setText(username);
     }
 }

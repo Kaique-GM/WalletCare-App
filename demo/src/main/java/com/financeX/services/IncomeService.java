@@ -8,7 +8,7 @@ public class IncomeService {
 
     private IncomeDao dao = DaoFactory.createIncomeDao();
 
-    public void insert(Integer userId, Integer monthId, Income obj){
+    public void insert(Integer userId, Integer monthId, Income obj) {
         dao.insert(userId, monthId, obj);
     }
 }

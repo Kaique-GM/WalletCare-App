@@ -7,16 +7,15 @@ import com.financeX.services.db.DB;
 
 public class DaoFactory {
 
-    public static UserDao createUserDao(){
+    public static UserDao createUserDao() {
         return new UserDaoJDBC(DB.getConnection());
     }
 
-    public static MonthDao createMonthDao(){
+    public static MonthDao createMonthDao() {
         return new MonthDaoJDBC(DB.getConnection());
     }
 
-    public static IncomeDao createIncomeDao(){
+    public static IncomeDao createIncomeDao() {
         return new IncomeDaoJDBC(DB.getConnection());
-        };
-    }
-
+    };
+}
