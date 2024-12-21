@@ -16,7 +16,7 @@ public class ExpenseService {
         dao.delete(userId, expense_id);
     }
 
-    // public void update(Integer userId, Income obj, Integer income_id) {
-    //     dao.update(userId, obj, income_id);
-    // }
+    public void update(Integer userId, Expenses obj, Integer expense_id) {
+        dao.update(userId, obj, expense_id);
+    }
 }

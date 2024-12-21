@@ -74,25 +74,25 @@ public class ExpenseDaoJDBC implements ExpenseDao {
     }
 
     @Override
-    public void update(Integer userId, Expenses eobj, Integer Expense_id) {
-        // String sql = "UPDATE incomes SET description_i = ?, value_i = ?, income_date = ? WHERE id_income = ? AND id_user = ?";
-        // PreparedStatement st = null;
+    public void update(Integer userId, Expenses obj, Integer Expense_id) {
+        String sql = "UPDATE expenses SET description_e = ?, value_e = ?, expenses_date = ? WHERE id_expenses = ? AND id_user = ?";
+        PreparedStatement st = null;
 
-        // try {
-        //     st = conn.prepareStatement(sql);
-        //     st.setString(1, obj.getDescription());
-        //     st.setBigDecimal(2, obj.getValue());
-        //     st.setDate(3, new java.sql.Date(obj.getDate().getTime()));
-        //     st.setInt(4, income_id);
-        //     st.setInt(5, userId);
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, obj.getDescription());
+            st.setBigDecimal(2, obj.getValue());
+            st.setDate(3, new java.sql.Date(obj.getDate().getTime()));
+            st.setInt(4, Expense_id);
+            st.setInt(5, userId);
 
-        //     st.executeUpdate();
+            st.executeUpdate();
 
-        // } catch (SQLException e) {
-        //     throw new DbException(e.getMessage());
-        // } finally {
-        //     DB.closeStatement(st);
-        // }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
 
     }
 

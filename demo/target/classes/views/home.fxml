@@ -101,8 +101,8 @@
                                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                             <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
                                             <Button fx:id="btnAddFixedExpense" onAction="#onAddFixedExpense" text="Add" />
-                                            <Button fx:id="btnRemoveFixedExpense" onAction="#onRemoveFixedExpense" text="Remove" />
-                                            <Button fx:id="btnEditFixedExpense" text="Edit" />
+                                            <Button fx:id="btnRemoveFixedExpense" onAction="#onRemoveExpense" text="Remove" />
+                                            <Button fx:id="btnEditFixedExpense" onAction="#onUpdateExpense" text="Edit" />
                                         </HBox>
                                     </top>
                                     <center>
@@ -128,9 +128,9 @@
                                     <top>
                                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                             <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
-                                            <Button fx:id="btnAddVariableExpense" text="Add" />
-                                            <Button fx:id="btnRemoveVariableExpense" text="Remove" />
-                                            <Button fx:id="btnEditVariableExpense" text="Edit" />
+                                            <Button fx:id="btnAddVariableExpense" onAction="#onAddVariableExpense" text="Add" />
+                                            <Button fx:id="btnRemoveVariableExpense" onAction="#onRemoveExpense" text="Remove" />
+                                            <Button fx:id="btnEditVariableExpense" onAction="#onUpdateExpense" text="Edit" />
                                         </HBox>
                                     </top>
                                     <center>
@@ -192,8 +192,8 @@
                                                 <children>
                                                    <Label style="-fx-font-size: 14px;" text="Manage Entries" />
                                                    <Button fx:id="btnAddEntry1" onAction="#onAddEntries" text="Add" />
-                                                   <Button fx:id="btnRemoveEntry1" text="Remove" />
-                                                   <Button fx:id="btnEditEntry1" text="Edit" />
+                                                   <Button fx:id="btnRemoveEntry1" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry1" onAction="#onUpdateEntries" text="Edit" />
                                                 </children>
                                              </HBox>
                                           </top>
@@ -226,9 +226,9 @@
                                              <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                                 <children>
                                                    <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
-                                                   <Button fx:id="btnAddFixedExpense1" text="Add" />
-                                                   <Button fx:id="btnRemoveFixedExpense1" text="Remove" />
-                                                   <Button fx:id="btnEditFixedExpense1" text="Edit" />
+                                                   <Button fx:id="btnAddFixedExpense1" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense1" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense1" onAction="#onUpdateExpense" text="Edit" />
                                                 </children>
                                              </HBox>
                                           </top>
@@ -261,14 +261,1404 @@
                                              <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
                                                 <children>
                                                    <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
-                                                   <Button fx:id="btnAddVariableExpense1" text="Add" />
-                                                   <Button fx:id="btnRemoveVariableExpense1" text="Remove" />
-                                                   <Button fx:id="btnEditVariableExpense1" text="Edit" />
+                                                   <Button fx:id="btnAddVariableExpense1" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense1" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense1" onAction="#onUpdateExpense" text="Edit" />
                                                 </children>
                                              </HBox>
                                           </top>
                                           <center>
                                              <TableView fx:id="tableVariableExpenses1">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="March">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for March" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary2" title="Income vs Expenses for March" />
+                                             <BarChart fx:id="barChartJanuary2" title="Monthly Analysis for March">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for March" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry2" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry2" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry2" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries2">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for March" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense2" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense2" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense2" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses2">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for March" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense2" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense2" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense2" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses2">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="April">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for April" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary3" title="Income vs Expenses for April" />
+                                             <BarChart fx:id="barChartJanuary3" title="Monthly Analysis for April">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for April" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry3" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry3" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry3" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries3">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for April" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense3" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense3" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense3" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses3">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for April" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense3" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense3" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense3" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses3">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="May">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for May" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary4" title="Income vs Expenses for May" />
+                                             <BarChart fx:id="barChartJanuary4" title="Monthly Analysis for May">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for May" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry4" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry4" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry4" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries4">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for May" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense4" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense4" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense4" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses4">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for May" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense4" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense4" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense4" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses4">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="June">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for June" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary5" title="Income vs Expenses for June" />
+                                             <BarChart fx:id="barChartJanuary5" title="Monthly Analysis for June">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for June" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry5" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry5" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry5" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries5">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for June" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense5" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense5" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense5" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses5">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for June" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense5" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense5" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense5" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses5">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="July">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for July" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary6" title="Income vs Expenses for July" />
+                                             <BarChart fx:id="barChartJanuary6" title="Monthly Analysis for July">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for July" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry6" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry6" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry6" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries6">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for July" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense6" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense6" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense6" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses6">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for July" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense6" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense6" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense6" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses6">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="August">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for August" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary7" title="Income vs Expenses for August" />
+                                             <BarChart fx:id="barChartJanuary7" title="Monthly Analysis for August">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for August" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry7" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry7" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry7" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries7">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for August" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense7" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense7" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense7" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses7">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for August" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense7" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense7" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense7" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses7">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="September">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for September" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary8" title="Income vs Expenses for September" />
+                                             <BarChart fx:id="barChartJanuary8" title="Monthly Analysis for September">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for September" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry8" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry8" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry8" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries8">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for September" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense8" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense8" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense8" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses8">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for September" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense8" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense8" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense8" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses8">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="October">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for October" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary9" title="Income vs Expenses for October" />
+                                             <BarChart fx:id="barChartJanuary9" title="Monthly Analysis for October">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for October" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry9" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry9" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry9" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries9">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for October" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense9" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense9" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense9" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses9">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for October" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense9" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense9" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense9" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses9">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="November">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for November" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary10" title="Income vs Expenses for November" />
+                                             <BarChart fx:id="barChartJanuary10" title="Monthly Analysis for November">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for November" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry10" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry10" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry10" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries10">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for November" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense10" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense10" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense10" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses10">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for November" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense10" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense10" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense10" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses10">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </content>
+         </Tab>
+         <Tab text="December">
+            <content>
+               <TabPane>
+                  <tabs>
+                     <Tab text="Overview">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Overview for December" />
+                                       <HBox alignment="CENTER" spacing="20">
+                                          <children>
+                                             <PieChart fx:id="pieChartJanuary11" title="Income vs Expenses for December" />
+                                             <BarChart fx:id="barChartJanuary11" title="Monthly Analysis for December">
+                                                <xAxis>
+                                                   <CategoryAxis label="Categories" />
+                                                </xAxis>
+                                                <yAxis>
+                                                   <NumberAxis label="Amount" />
+                                                </yAxis>
+                                             </BarChart>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Entries">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Entries for December" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Entries" />
+                                                   <Button fx:id="btnAddEntry11" onAction="#onAddEntries" text="Add" />
+                                                   <Button fx:id="btnRemoveEntry11" onAction="#onRemoveEntries" text="Remove" />
+                                                   <Button fx:id="btnEditEntry11" onAction="#onUpdateEntries" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableEntries11">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Fixed Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Fixed Expenses for December" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Fixed Expenses" />
+                                                   <Button fx:id="btnAddFixedExpense11" onAction="#onAddFixedExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveFixedExpense11" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditFixedExpense11" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableFixedExpenses11">
+                                                <columns>
+                                                   <TableColumn text="ID" />
+                                                   <TableColumn prefWidth="225.0" text="Description" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
+                                                   <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                </columns>
+                                             </TableView>
+                                          </center>
+                                       </BorderPane>
+                                    </children>
+                                 </VBox>
+                              </content>
+                           </ScrollPane>
+                        </content>
+                     </Tab>
+                     <Tab text="Variable Expenses">
+                        <content>
+                           <ScrollPane fitToHeight="true" fitToWidth="true">
+                              <content>
+                                 <VBox alignment="CENTER" spacing="20">
+                                    <children>
+                                       <Label style="-fx-font-size: 16px;" text="Variable Expenses for December" />
+                                       <BorderPane>
+                                          <top>
+                                             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="1020.0" spacing="10">
+                                                <children>
+                                                   <Label style="-fx-font-size: 14px;" text="Manage Variable Expenses" />
+                                                   <Button fx:id="btnAddVariableExpense11" onAction="#onAddVariableExpense" text="Add" />
+                                                   <Button fx:id="btnRemoveVariableExpense11" onAction="#onRemoveExpense" text="Remove" />
+                                                   <Button fx:id="btnEditVariableExpense11" onAction="#onUpdateExpense" text="Edit" />
+                                                </children>
+                                             </HBox>
+                                          </top>
+                                          <center>
+                                             <TableView fx:id="tableVariableExpenses11">
                                                 <columns>
                                                    <TableColumn text="ID" />
                                                    <TableColumn prefWidth="225.0" text="Description" />

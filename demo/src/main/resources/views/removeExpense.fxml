@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.Expenses.RemoveFixedExpensesController">
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.Expenses.RemoveExpensesController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
-    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Remove Fixed Expense" />
+    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Remove Expense" />
 
     <VBox alignment="CENTER_LEFT" spacing="10">
         <Label text="Expense ID:" />

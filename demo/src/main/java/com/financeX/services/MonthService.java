@@ -2,7 +2,6 @@ package com.financeX.services;
 
 import com.financeX.model.dao.DaoFactory;
 import com.financeX.model.dao.MonthDao;
-import com.financeX.model.entities.User;
 
 public class MonthService {
 

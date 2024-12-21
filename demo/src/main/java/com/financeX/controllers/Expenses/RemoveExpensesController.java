@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class RemoveFixedExpensesController {
+public class RemoveExpensesController {
 
     private ExpenseService service = new ExpenseService();
     private Session session;

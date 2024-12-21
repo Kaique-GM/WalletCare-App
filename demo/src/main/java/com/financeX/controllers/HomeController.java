@@ -7,7 +7,9 @@ import com.financeX.controllers.Entries.AddEntriesController;
 import com.financeX.controllers.Entries.RemoveEntriesController;
 import com.financeX.controllers.Entries.UpdateEntriesController;
 import com.financeX.controllers.Expenses.AddFixedExpensesController;
-import com.financeX.controllers.Expenses.RemoveFixedExpensesController;
+import com.financeX.controllers.Expenses.AddVariableController;
+import com.financeX.controllers.Expenses.RemoveExpensesController;
+import com.financeX.controllers.Expenses.UpdateExpensesController;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
@@ -93,6 +95,32 @@ public class HomeController {
     }
 
     @FXML
+    private void onAddVariableExpense(ActionEvent event) {
+        String currentMonth = tabPane.getSelectionModel().getSelectedItem().getText();
+        AddVariableController addVariableController;
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/addVariableExpense.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load());
+
+            addVariableController = fxmlLoader.getController();
+            addVariableController.setYear(year);
+            addVariableController.setCurrentMonth(currentMonth);
+            addVariableController.setSession(Session.getInstance());
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setScene(newScene);
+            newStage.setTitle("Add Variable Expenses");
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error loading the add variable expenses screen", AlertType.ERROR);
+        }
+    }
+
+    @FXML
     private void onRemoveEntries(ActionEvent event) {
         RemoveEntriesController removeEntriesController;
         try {
@@ -116,10 +144,10 @@ public class HomeController {
     }
 
     @FXML
-    private void onRemoveFixedExpense(ActionEvent event) {
-        RemoveFixedExpensesController removeFixedExpensesController;
+    private void onRemoveExpense(ActionEvent event) {
+        RemoveExpensesController removeFixedExpensesController;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeFixedExpense.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeExpense.fxml"));
             Scene newScene = new Scene(fxmlLoader.load());
 
             removeFixedExpensesController = fxmlLoader.getController();
@@ -158,6 +186,29 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Error loading the edit incomes screen", AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void onUpdateExpense(ActionEvent event) {
+        UpdateExpensesController updateFixedExpensesController;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/updateExpenses.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load());
+
+            updateFixedExpensesController = fxmlLoader.getController();
+            updateFixedExpensesController.setSession(Session.getInstance());
+
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setScene(newScene);
+            newStage.setTitle("Edit Expenses");
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Error loading the edit expenses screen", AlertType.ERROR);
         }
     }
 
