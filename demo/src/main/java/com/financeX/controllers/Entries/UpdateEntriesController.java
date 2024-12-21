@@ -5,6 +5,7 @@ import com.financeX.services.IncomeService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ public class UpdateEntriesController {
 
     private IncomeService service = new IncomeService();
     private Session session;
+    private ObservableList<Income> incomeList;
 
     @FXML
     private TextField incomeIdField;
@@ -36,6 +38,9 @@ public class UpdateEntriesController {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+    public void setIncomeList(ObservableList<Income> incomeList) {
+        this.incomeList = incomeList;
     }
 
     @FXML
@@ -56,9 +61,18 @@ public class UpdateEntriesController {
             income.setDescription(description);
             income.setDate(new java.util.Date());
             income.setValue(value);
+            income.setId(incomeId);
 
             int userId = session.getUserID();
             service.update(userId, income, incomeId);
+
+            for (int i = 0; i < incomeList.size(); i++) {
+                Income IncomeAux = incomeList.get(i);
+                if (IncomeAux.getId() == incomeId) {
+                    incomeList.set(i, income);
+                    break;
+                }
+            }
 
             Alerts.showAlert("Success", null, "Income successfully updated.", AlertType.INFORMATION);
 

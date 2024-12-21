@@ -1,5 +1,7 @@
 package com.financeX.model.dao;
 
+import java.util.List;
+
 import com.financeX.model.entities.Expenses;
 
 public interface ExpenseDao {
@@ -8,5 +10,7 @@ public interface ExpenseDao {
     void delete(Integer userId, Integer Expense_id);
 
     void update(Integer userId, Expenses obj, Integer Expense_id);
+
+    List<Expenses> getExpenses(Integer userId, Integer monthId,Integer category);
 
 }

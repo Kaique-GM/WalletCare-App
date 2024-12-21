@@ -1,5 +1,7 @@
 package com.financeX.services;
 
+import java.util.List;
+
 import com.financeX.model.dao.DaoFactory;
 import com.financeX.model.dao.ExpenseDao;
 import com.financeX.model.entities.Expenses;
@@ -18,5 +20,9 @@ public class ExpenseService {
 
     public void update(Integer userId, Expenses obj, Integer expense_id) {
         dao.update(userId, obj, expense_id);
+    }
+
+    public List<Expenses> getExpenses(Integer userId, Integer monthId, Integer category){
+        return dao.getExpenses(userId, monthId, category);
     }
 }

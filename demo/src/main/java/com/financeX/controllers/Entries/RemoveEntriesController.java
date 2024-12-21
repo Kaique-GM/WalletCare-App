@@ -1,9 +1,11 @@
 package com.financeX.controllers.Entries;
 
+import com.financeX.model.entities.Income;
 import com.financeX.services.IncomeService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -15,6 +17,7 @@ public class RemoveEntriesController {
 
     private IncomeService service = new IncomeService();
     private Session session;
+    private ObservableList<Income> incomeList;
 
     @FXML
     private TextField incomeIdField;
@@ -27,6 +30,10 @@ public class RemoveEntriesController {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    public void setIncomeList(ObservableList<Income> incomeList) {
+        this.incomeList = incomeList;
     }
 
     @FXML
@@ -42,8 +49,20 @@ public class RemoveEntriesController {
 
             service.delete(userId, income_id);
 
+            Income incomeToRemove = null;
+            for (Income income : incomeList) {
+                if (income.getId() == income_id) {
+                    incomeToRemove = income;
+                    break;
+                }
+            }
+
+            if (incomeToRemove != null) {
+                incomeList.remove(incomeToRemove);
+            }
+
             Alerts.showAlert("Success", null, "Income successfully removed.", AlertType.INFORMATION);
-            
+
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {

@@ -1,5 +1,7 @@
 package com.financeX.model.dao;
 
+import java.util.List;
+
 import com.financeX.model.entities.Income;
 
 public interface IncomeDao {
@@ -9,4 +11,5 @@ public interface IncomeDao {
 
     void update(Integer userId, Income obj,Integer income_id);
 
+    List<Income> getIncomes(Integer userId, Integer monthId);
 }

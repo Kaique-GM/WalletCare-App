@@ -8,6 +8,7 @@ import com.financeX.services.MonthService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -19,6 +20,7 @@ public class AddVariableController {
 
     private ExpenseService service = new ExpenseService();
     private MonthService service2 = new MonthService();
+    private ObservableList<Expenses> expenseList;
     private String currentMonth;
     private Session session;
     private Integer year;
@@ -45,6 +47,10 @@ public class AddVariableController {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public void setExpensesList(ObservableList<Expenses> expensesList) {
+        this.expenseList = expensesList;
     }
 
     @FXML
@@ -81,6 +87,7 @@ public class AddVariableController {
             int category = 3;
 
             service.insert(userId, monthId, expense, category);
+            expenseList.add(expense);
 
             Alerts.showAlert("Success", null, "Expense successfully added.", AlertType.INFORMATION);
 

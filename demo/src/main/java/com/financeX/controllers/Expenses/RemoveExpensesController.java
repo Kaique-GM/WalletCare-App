@@ -1,9 +1,11 @@
 package com.financeX.controllers.Expenses;
 
+import com.financeX.model.entities.Expenses;
 import com.financeX.services.ExpenseService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -14,6 +16,8 @@ import javafx.stage.Stage;
 public class RemoveExpensesController {
 
     private ExpenseService service = new ExpenseService();
+    private ObservableList<Expenses> expenseFixedList;
+    private ObservableList<Expenses> expenseVariableList;
     private Session session;
 
     @FXML
@@ -29,6 +33,14 @@ public class RemoveExpensesController {
         this.session = session;
     }
 
+    public void setExpenseFixedList(ObservableList<Expenses> expenseFixedList) {
+        this.expenseFixedList = expenseFixedList;
+    }
+
+    public void setExpenseVariableList(ObservableList<Expenses> expenseVariableList) {
+        this.expenseVariableList = expenseVariableList;
+    }
+
     @FXML
     public void onConfirm(ActionEvent event) {
         try {
@@ -42,8 +54,32 @@ public class RemoveExpensesController {
 
             service.delete(userId, expense_id);
 
+            Expenses expenseToRemove = null;
+
+            for (Expenses expenseAux : expenseFixedList) {
+                if (expenseAux.getId() == expense_id) {
+                    expenseToRemove = expenseAux;
+                    break;
+                }
+            }
+
+            for (Expenses expenseAux : expenseVariableList) {
+                if (expenseAux.getId() == expense_id) {
+                    expenseToRemove = expenseAux;
+                    break;
+                }
+            }
+
+            if (expenseToRemove != null) {
+                expenseFixedList.remove(expenseToRemove);
+                expenseVariableList.remove(expenseToRemove);
+            } else {
+                Alerts.showAlert("Error", null, "Expense not found in the lists.", AlertType.ERROR);
+                return;
+            }
+
             Alerts.showAlert("Success", null, "Expense successfully removed.", AlertType.INFORMATION);
-            
+
             Stage stage = (Stage) confirmButton.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {

@@ -80,10 +80,10 @@
                                     <center>
                                         <TableView fx:id="tableEntries">
                                             <columns>
-                                                <TableColumn text="ID" />
-                                                <TableColumn prefWidth="225.0" text="Description" />
-                                                <TableColumn prefWidth="225.0" text="Value" />
-                                    <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                <TableColumn fx:id="idColumn" text="ID" />
+                                                <TableColumn fx:id="descriptionColumn" prefWidth="225.0" text="Description" />
+                                                <TableColumn fx:id="valueColumn" prefWidth="225.0" text="Value" />
+                                    <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="225.0" text="Data" />
                                             </columns>
                                         </TableView>
                                     </center>
@@ -108,10 +108,10 @@
                                     <center>
                                         <TableView fx:id="tableFixedExpenses">
                                             <columns>
-                                                <TableColumn text="ID" />
-                                                <TableColumn prefWidth="225.0" text="Description" />
-                                                <TableColumn minWidth="0.0" prefWidth="225.0" text="Value" />
-                                    <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                <TableColumn fx:id="idExpenseColumn" text="ID" />
+                                                <TableColumn fx:id="descriptionExpenseColumn" prefWidth="225.0" text="Description" />
+                                                <TableColumn fx:id="valueExpenseColumn" minWidth="0.0" prefWidth="225.0" text="Value" />
+                                    <TableColumn fx:id="dateExpenseColumn" minWidth="0.0" prefWidth="225.0" text="Data" />
                                             </columns>
                                         </TableView>
                                     </center>
@@ -136,10 +136,10 @@
                                     <center>
                                         <TableView fx:id="tableVariableExpenses">
                                             <columns>
-                                                <TableColumn text="ID" />
-                                                <TableColumn prefWidth="225.0" text="Description" />
-                                                <TableColumn prefWidth="225.0" text="Value" />
-                                    <TableColumn minWidth="0.0" prefWidth="225.0" text="Data" />
+                                                <TableColumn fx:id="idVariableExpenseColumn" text="ID" />
+                                                <TableColumn fx:id="descriptionVariableExpenseColumn" prefWidth="225.0" text="Description" />
+                                                <TableColumn fx:id="valueVariableExpenseColumn" prefWidth="225.0" text="Value" />
+                                    <TableColumn fx:id="dateVariableExpenseColumn" minWidth="0.0" prefWidth="225.0" text="Data" />
                                             </columns>
                                         </TableView>
                                     </center>

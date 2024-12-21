@@ -8,6 +8,7 @@ import com.financeX.services.MonthService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -22,6 +23,7 @@ public class AddEntriesController {
     private String currentMonth;
     private Session session;
     private Integer year;
+    private ObservableList<Income> incomeList;
 
     @FXML
     private TextField descriptionField;
@@ -45,6 +47,10 @@ public class AddEntriesController {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public void setIncomeList(ObservableList<Income> incomeList) {
+        this.incomeList = incomeList;
     }
 
     @FXML
@@ -80,6 +86,7 @@ public class AddEntriesController {
             income.setDate(new java.util.Date());
 
             service.insert(userId, monthId, income);
+            incomeList.add(income);
 
             Alerts.showAlert("Success", null, "Income entry successfully added.", AlertType.INFORMATION);
 

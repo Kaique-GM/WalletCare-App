@@ -1,9 +1,13 @@
 package com.financeX.model.daoJDBC;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.financeX.model.dao.ExpenseDao;
 import com.financeX.model.entities.Expenses;
@@ -94,6 +98,47 @@ public class ExpenseDaoJDBC implements ExpenseDao {
             DB.closeStatement(st);
         }
 
+    }
+
+  @Override
+    public List<Expenses> getExpenses(Integer userId, Integer monthId, Integer category) {
+        String sql = "SELECT * FROM expenses WHERE id_user = ? AND id_month = ? AND id_category = ?";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.setInt(2, monthId);
+            st.setInt(3, category);
+
+            rs = st.executeQuery();
+            List<Expenses> expenses = new ArrayList<>();
+            
+            while (rs.next()) {
+                int id = rs.getInt("id_expenses");
+                String description = rs.getString("description_e");
+                BigDecimal value = rs.getBigDecimal("value_e");
+                Date date = rs.getDate("expenses_date");
+
+                Expenses expense = new Expenses();
+
+                expense.setId(id);
+                expense.setDescription(description);
+                expense.setValue(value);
+                expense.setDate(date);
+
+                expenses.add(expense);
+            }
+
+            return expenses;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 
 }

@@ -1,9 +1,13 @@
 package com.financeX.model.daoJDBC;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.financeX.model.dao.IncomeDao;
 import com.financeX.model.entities.Income;
@@ -95,4 +99,43 @@ public class IncomeDaoJDBC implements IncomeDao {
 
     }
 
+    @Override
+    public List<Income> getIncomes(Integer userId, Integer monthId) {
+        String sql = "SELECT * FROM incomes WHERE id_user = ? AND id_month = ?";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.setInt(2, monthId);
+
+            rs = st.executeQuery();
+            List<Income> incomes = new ArrayList<>();
+            
+            while (rs.next()) {
+                int id = rs.getInt("id_income");
+                String description = rs.getString("description_i");
+                BigDecimal value = rs.getBigDecimal("value_i");
+                Date date = rs.getDate("income_date");
+
+                Income income = new Income();
+
+                income.setId(id);
+                income.setDescription(description);
+                income.setValue(value);
+                income.setDate(date);
+
+                incomes.add(income);
+            }
+
+            return incomes;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
 }
