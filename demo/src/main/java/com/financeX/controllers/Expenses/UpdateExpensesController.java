@@ -1,6 +1,7 @@
 package com.financeX.controllers.Expenses;
 
 import com.financeX.model.entities.Expenses;
+import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.ExpenseService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
@@ -19,8 +20,8 @@ public class UpdateExpensesController {
 
     private ExpenseService service = new ExpenseService();
     private Session session;
-    private ObservableList<Expenses> expenseFixedList;
-    private ObservableList<Expenses> expenseVariableList;
+   private ObservableList<FinancialRecord> expenseFixedList;
+    private ObservableList<FinancialRecord> expenseVariableList;
 
     @FXML
     private TextField ExpenseIdField;
@@ -41,11 +42,11 @@ public class UpdateExpensesController {
         this.session = session;
     }
 
-    public void setExpenseFixedList(ObservableList<Expenses> expenseFixedList) {
+    public void setExpenseFixedList(ObservableList<FinancialRecord> expenseFixedList) {
         this.expenseFixedList = expenseFixedList;
     }
 
-    public void setExpenseVariableList(ObservableList<Expenses> expenseVariableList) {
+    public void setExpenseVariableList(ObservableList<FinancialRecord> expenseVariableList) {
         this.expenseVariableList = expenseVariableList;
     }
 
@@ -73,7 +74,7 @@ public class UpdateExpensesController {
             service.update(userId, expenses, expenseId);
 
             for (int i = 0; i < expenseFixedList.size(); i++) {
-                Expenses expenseAux = expenseFixedList.get(i);
+                FinancialRecord expenseAux = expenseFixedList.get(i);
                 if (expenseAux.getId() == expenseId) {
                     expenseFixedList.set(i, expenses);
                     break;
@@ -81,7 +82,7 @@ public class UpdateExpensesController {
             }
 
             for (int i = 0; i < expenseVariableList.size(); i++) {
-                Expenses expenseAux = expenseVariableList.get(i);
+                FinancialRecord expenseAux = expenseVariableList.get(i);
                 if (expenseAux.getId() == expenseId) {
                     expenseVariableList.set(i, expenses);
                     break;

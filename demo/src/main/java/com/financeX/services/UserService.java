@@ -43,4 +43,8 @@ public class UserService {
     public void insert12Months(User obj) {
         dao.insert12Months(obj);
     }
+
+    public void insertYear(Integer year, Integer userId){
+        dao.insertYear(year, userId);
+    }
 }

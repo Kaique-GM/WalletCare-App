@@ -1,6 +1,7 @@
 package com.financeX.controllers.Entries;
 
 import com.financeX.model.entities.Income;
+import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.IncomeService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
@@ -19,7 +20,7 @@ public class UpdateEntriesController {
 
     private IncomeService service = new IncomeService();
     private Session session;
-    private ObservableList<Income> incomeList;
+    private ObservableList<FinancialRecord> incomeList;
 
     @FXML
     private TextField incomeIdField;
@@ -39,7 +40,7 @@ public class UpdateEntriesController {
     public void setSession(Session session) {
         this.session = session;
     }
-    public void setIncomeList(ObservableList<Income> incomeList) {
+    public void setIncomeList(ObservableList<FinancialRecord> incomeList) {
         this.incomeList = incomeList;
     }
 
@@ -67,7 +68,7 @@ public class UpdateEntriesController {
             service.update(userId, income, incomeId);
 
             for (int i = 0; i < incomeList.size(); i++) {
-                Income IncomeAux = incomeList.get(i);
+                FinancialRecord IncomeAux = incomeList.get(i);
                 if (IncomeAux.getId() == incomeId) {
                     incomeList.set(i, income);
                     break;

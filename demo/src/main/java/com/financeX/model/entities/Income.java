@@ -3,7 +3,9 @@ package com.financeX.model.entities;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Income {
+import com.financeX.model.entities.interfaces.FinancialRecord;
+
+public class Income implements FinancialRecord {
    private Integer id;
    private String description;
    private BigDecimal value;

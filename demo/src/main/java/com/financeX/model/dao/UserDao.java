@@ -15,4 +15,6 @@ public interface UserDao {
     Integer findIdByUsername(String username);
 
     void insert12Months(User obj);
+
+    void insertYear(Integer year, Integer userId);
 }

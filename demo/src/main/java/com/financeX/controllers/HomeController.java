@@ -1,278 +1,174 @@
 package com.financeX.controllers;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
-import com.financeX.controllers.Entries.AddEntriesController;
-import com.financeX.controllers.Entries.RemoveEntriesController;
-import com.financeX.controllers.Entries.UpdateEntriesController;
-import com.financeX.controllers.Expenses.AddFixedExpensesController;
-import com.financeX.controllers.Expenses.AddVariableController;
-import com.financeX.controllers.Expenses.RemoveExpensesController;
-import com.financeX.controllers.Expenses.UpdateExpensesController;
-import com.financeX.model.entities.Expenses;
-import com.financeX.model.entities.Income;
-import com.financeX.services.ExpenseService;
-import com.financeX.services.IncomeService;
-import com.financeX.services.MonthService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HomeController {
-
-    private int year;
-
-    private ObservableList<Income> incomeList = FXCollections.observableArrayList();
-    private ObservableList<Expenses> fixedExpensesList = FXCollections.observableArrayList();
-    private ObservableList<Expenses> variableExpensesList = FXCollections.observableArrayList();
-
-    private IncomeService incomeService = new IncomeService();
-    private ExpenseService expenseService = new ExpenseService();
-    private MonthService monthService = new MonthService();
+    
+    private Session session;
+    private Integer year;
+    private Integer userID;
 
     @FXML
-    private TabPane tabPane;
+    private VBox menuPane;
+
+    @FXML
+    private PieChart expensesPieChart;
+
+    @FXML
+    private BarChart<String, Number> revenueBarChart;
+
+    @FXML
+    private CategoryAxis barXAxis;
+
+    @FXML
+    private Button btnOverview;
+
+    @FXML
+    private Button btLogout;
+
+    @FXML
+    private Button btnMonthChange;
+
+    @FXML
+    private Button btnYearChange;
+
+    @FXML
+    private Button btnTablesScreen;
+
     @FXML
     private Label labelYear;
-    @FXML
-    private Label labelUser;
-    @FXML
-    private MenuButton menuButton;
-    @FXML
-    private TableView<Income> tableEntries;
-    @FXML
-    private TableView<Expenses> tableFixedExpenses;
-    @FXML
-    private TableView<Expenses> tableVariableExpenses;
-    @FXML
-    private TableColumn<Expenses, Integer> idVariableExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, String> descriptionVariableExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, BigDecimal> valueVariableExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, String> dateVariableExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, Integer> idExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, String> descriptionExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, BigDecimal> valueExpenseColumn;
-    @FXML
-    private TableColumn<Expenses, String> dateExpenseColumn;
-    @FXML
-    private TableColumn<Income, Integer> idColumn;
-    @FXML
-    private TableColumn<Income, String> descriptionColumn;
-    @FXML
-    private TableColumn<Income, BigDecimal> valueColumn;
-    @FXML
-    private TableColumn<Income, String> dateColumn;
+
+    private boolean isMenuVisible = true;
+
+    public void initialize() {
+        session = Session.getInstance();
+        userID = session.getUserID();
+        year = LocalDate.now().getYear();
+        labelYear.setText("" + year);
+
+        configureExpensesPieChart();
+        configureRevenueBarChart();
+    }
+
+    private void configureExpensesPieChart() {
+        expensesPieChart.getData().addAll(
+                new PieChart.Data("Rent", 35),
+                new PieChart.Data("Utilities", 20),
+                new PieChart.Data("Salaries", 25),
+                new PieChart.Data("Miscellaneous", 20));
+    }
+
+    private void configureRevenueBarChart() {
+        barXAxis.setCategories(javafx.collections.FXCollections.observableArrayList("January", "February", "March"));
+
+        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
+        incomeSeries.setName("Income");
+        incomeSeries.getData().add(new XYChart.Data<>("January", 8000));
+        incomeSeries.getData().add(new XYChart.Data<>("February", 9500));
+        incomeSeries.getData().add(new XYChart.Data<>("March", 11000));
+
+        XYChart.Series<String, Number> fixedExpensesSeries = new XYChart.Series<>();
+        fixedExpensesSeries.setName("Fixed Expenses");
+        fixedExpensesSeries.getData().add(new XYChart.Data<>("January", 4000));
+        fixedExpensesSeries.getData().add(new XYChart.Data<>("February", 4200));
+        fixedExpensesSeries.getData().add(new XYChart.Data<>("March", 4500));
+
+        XYChart.Series<String, Number> variableExpensesSeries = new XYChart.Series<>();
+        variableExpensesSeries.setName("Variable Expenses");
+        variableExpensesSeries.getData().add(new XYChart.Data<>("January", 1500));
+        variableExpensesSeries.getData().add(new XYChart.Data<>("February", 1800));
+        variableExpensesSeries.getData().add(new XYChart.Data<>("March", 2000));
+
+        revenueBarChart.getData().addAll(incomeSeries, fixedExpensesSeries, variableExpensesSeries);
+    }
 
     @FXML
-    private void onAddEntries(ActionEvent event) {
-        String currentMonth = tabPane.getSelectionModel().getSelectedItem().getText();
-        AddEntriesController addController;
+    private void toggleMenu() {
+        isMenuVisible = !isMenuVisible;
+        menuPane.setVisible(isMenuVisible);
+    }
 
+    @FXML
+    private void handleOverview() {
+        System.out.println("🏠 Overview selected.");
+    }
+
+    @FXML
+    private void handleMonthChange() {
+        System.out.println("📅 Change Month selected.");
+    }
+
+    @FXML
+    private void handleYearChange() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/addEntries.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/yearChange.fxml"));
+            Scene scene = new Scene(loader.load());
 
-            addController = fxmlLoader.getController();
-            addController.setYear(year);
-            addController.setCurrentMonth(currentMonth);
-            addController.setSession(Session.getInstance());
-            addController.setIncomeList(incomeList);
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Change Year");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(labelYear.getScene().getWindow());
+            dialogStage.setScene(scene);
 
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Add Entries");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
+            YearChangeController controller = loader.getController();
+            controller.setYear(year);
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+
+            if (controller.isOkClicked()) {
+                year = controller.getYear();
+                labelYear.setText("" + year);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the add incomes screen", AlertType.ERROR);
+            Alerts.showAlert("Error", null, "Failed to load the year change dialog.", AlertType.ERROR);
         }
     }
 
     @FXML
-    private void onAddFixedExpense(ActionEvent event) {
-        String currentMonth = tabPane.getSelectionModel().getSelectedItem().getText();
-        AddFixedExpensesController addFixedExpensesController;
-
+    private void handleTablesScreen() {
+        TablesController tablesController;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/addFixedExpense.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tables.fxml"));
+            Scene scene = new Scene(loader.load());
 
-            addFixedExpensesController = fxmlLoader.getController();
-            addFixedExpensesController.setYear(year);
-            addFixedExpensesController.setCurrentMonth(currentMonth);
-            addFixedExpensesController.setSession(Session.getInstance());
-            addFixedExpensesController.setExpensesList(fixedExpensesList);
+            tablesController = loader.getController();
+            tablesController.setUserId(userID);
+            tablesController.setYear(year);
 
+            Stage stage = (Stage) btnTablesScreen.getScene().getWindow();
+            stage.close();
 
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Add Fixed Expenses");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
-
+            Stage tableStage = new Stage();
+            tableStage.setScene(scene);
+            tableStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the add fixed expenses screen", AlertType.ERROR);
+            Alerts.showAlert("Error", null, "Error", AlertType.ERROR);
+
         }
-    }
 
-    @FXML
-    private void onAddVariableExpense(ActionEvent event) {
-        String currentMonth = tabPane.getSelectionModel().getSelectedItem().getText();
-        AddVariableController addVariableController;
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/addVariableExpense.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
-
-            addVariableController = fxmlLoader.getController();
-            addVariableController.setYear(year);
-            addVariableController.setCurrentMonth(currentMonth);
-            addVariableController.setSession(Session.getInstance());
-            addVariableController.setExpensesList(variableExpensesList);
-
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Add Variable Expenses");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the add variable expenses screen", AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    private void onRemoveEntries(ActionEvent event) {
-        RemoveEntriesController removeEntriesController;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeEntries.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
-
-            removeEntriesController = fxmlLoader.getController();
-            removeEntriesController.setSession(Session.getInstance());
-            removeEntriesController.setIncomeList(incomeList);
-            
-
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Remove Entries");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the remove incomes screen", AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    private void onRemoveExpense(ActionEvent event) {
-        RemoveExpensesController removeExpensesController;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/removeExpense.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
-
-            removeExpensesController = fxmlLoader.getController();
-            removeExpensesController.setSession(Session.getInstance());
-            removeExpensesController.setExpenseFixedList(fixedExpensesList);
-            removeExpensesController.setExpenseVariableList(variableExpensesList);
-
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Remove Fixed Expense");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the remove fixed Expense screen", AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    private void onUpdateEntries(ActionEvent event) {
-        UpdateEntriesController updateEntriesController;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/updateEntries.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
-
-            updateEntriesController = fxmlLoader.getController();
-            updateEntriesController.setSession(Session.getInstance());
-            updateEntriesController.setIncomeList(incomeList);
-
-
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Edit Entries");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the edit incomes screen", AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    private void onUpdateExpense(ActionEvent event) {
-        UpdateExpensesController updateFixedExpensesController;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/updateExpenses.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
-
-            updateFixedExpensesController = fxmlLoader.getController();
-            updateFixedExpensesController.setSession(Session.getInstance());
-            updateFixedExpensesController.setExpenseFixedList(fixedExpensesList);
-            updateFixedExpensesController.setExpenseVariableList(variableExpensesList);
-
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.setScene(newScene);
-            newStage.setTitle("Edit Expenses");
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alerts.showAlert("Error", null, "Error loading the edit expenses screen", AlertType.ERROR);
-        }
     }
 
     @FXML
@@ -283,7 +179,7 @@ public class HomeController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
             Scene loginScene = new Scene(fxmlLoader.load());
 
-            Stage stage = (Stage) menuButton.getScene().getWindow();
+            Stage stage = (Stage) btLogout.getScene().getWindow();
 
             stage.close();
 
@@ -294,98 +190,6 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Error loading the Login screen", AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    public void onYearSelected(ActionEvent event) {
-        MenuItem selectedItem = (MenuItem) event.getSource();
-        String selectedYearText = selectedItem.getText();
-
-        try {
-            year = Integer.parseInt(selectedYearText);
-            labelYear.setText("" + year);
-        } catch (NumberFormatException e) {
-            Alerts.showAlert("Error", null, "Invalid year selected", AlertType.ERROR);
-        }
-    }
-
-    @FXML
-    private void initialize() {
-        Session session = Session.getInstance();
-        int user_id = session.getUserID();
-        String username = session.getUsername();
-
-        year = LocalDate.now().getYear();
-        labelYear.setText("" + year);
-        labelUser.setText(username);
-
-        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
-            if (oldTab != newTab) {
-                String currentMonth = newTab.getText();
-                int monthId = monthService.getMonthId(currentMonth, year, user_id);
-
-                loadIncomes(user_id, monthId);
-                loadFixedExpenses(user_id, monthId, 2);
-                loadVariableExpenses(user_id, monthId, 3);
-
-            }
-        });
-
-        setCellValues();
-    }
-
-    private void loadIncomes(Integer userId, Integer monthId) {
-        incomeList.clear();
-        incomeList.addAll(incomeService.getIncomes(userId, monthId));
-        tableEntries.setItems(incomeList);
-    }
-
-    private void loadFixedExpenses(Integer userId, Integer monthId, Integer category) {
-        fixedExpensesList.clear();
-        fixedExpensesList.addAll(expenseService.getExpenses(userId, monthId, category));
-        tableFixedExpenses.setItems(fixedExpensesList);
-    }
-
-    private void loadVariableExpenses(Integer userId, Integer monthId, Integer category) {
-        variableExpensesList.clear();
-        variableExpensesList.addAll(expenseService.getExpenses(userId, monthId, category));
-        tableVariableExpenses.setItems(variableExpensesList);
-    }
-
-    private void setCellValues() {
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        dateColumn.setCellValueFactory(cellData -> {
-            Income income = cellData.getValue();
-            return new SimpleStringProperty(formatDateForDisplay(income.getDate()));
-        });
-
-        idExpenseColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionExpenseColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        valueExpenseColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        dateExpenseColumn.setCellValueFactory(cellData -> {
-            Expenses expense = cellData.getValue();
-            return new SimpleStringProperty(formatDateForDisplay(expense.getDate()));
-        });
-
-        idVariableExpenseColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionVariableExpenseColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        valueVariableExpenseColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        dateVariableExpenseColumn.setCellValueFactory(cellData -> {
-            Expenses expense = cellData.getValue();
-        return new SimpleStringProperty(formatDateForDisplay(expense.getDate()));
-    });
-    }
-
-    private String formatDateForDisplay(Date date) {
-        if (date != null) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            return dateFormat.format(date);
-        } else {
-            return "";
         }
     }
 }

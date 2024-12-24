@@ -1,6 +1,7 @@
 package com.financeX.controllers.Expenses;
 
 import com.financeX.model.entities.Expenses;
+import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.ExpenseService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
@@ -16,8 +17,8 @@ import javafx.stage.Stage;
 public class RemoveExpensesController {
 
     private ExpenseService service = new ExpenseService();
-    private ObservableList<Expenses> expenseFixedList;
-    private ObservableList<Expenses> expenseVariableList;
+    private ObservableList<FinancialRecord> expenseFixedList;
+    private ObservableList<FinancialRecord> expenseVariableList;
     private Session session;
 
     @FXML
@@ -33,11 +34,11 @@ public class RemoveExpensesController {
         this.session = session;
     }
 
-    public void setExpenseFixedList(ObservableList<Expenses> expenseFixedList) {
+    public void setExpenseFixedList(ObservableList<FinancialRecord> expenseFixedList) {
         this.expenseFixedList = expenseFixedList;
     }
 
-    public void setExpenseVariableList(ObservableList<Expenses> expenseVariableList) {
+    public void setExpenseVariableList(ObservableList<FinancialRecord> expenseVariableList) {
         this.expenseVariableList = expenseVariableList;
     }
 
@@ -54,16 +55,16 @@ public class RemoveExpensesController {
 
             service.delete(userId, expense_id);
 
-            Expenses expenseToRemove = null;
+            FinancialRecord expenseToRemove = null;
 
-            for (Expenses expenseAux : expenseFixedList) {
+            for (FinancialRecord expenseAux : expenseFixedList) {
                 if (expenseAux.getId() == expense_id) {
                     expenseToRemove = expenseAux;
                     break;
                 }
             }
 
-            for (Expenses expenseAux : expenseVariableList) {
+            for (FinancialRecord expenseAux : expenseVariableList) {
                 if (expenseAux.getId() == expense_id) {
                     expenseToRemove = expenseAux;
                     break;

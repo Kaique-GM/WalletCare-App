@@ -33,7 +33,12 @@ public class RegisterController {
     private Button registerButton;
 
     @FXML
-    private void OnRegister(ActionEvent event) {
+    private Button backButton;
+
+
+    //Method to register a new user in the database
+    @FXML
+    private void onRegister(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -54,13 +59,13 @@ public class RegisterController {
             user.setUsername(username);
             user.setPassword(password);
 
+            service.saveOrUpdate(user);
+            service.insert12Months(user);
+            
+            //Create the user Session
             Session session = Session.getInstance();
             session.setUsername(username);
             session.setUserID(service.findIdByUsername(username));
-
-            service.saveOrUpdate(user);
-
-            service.insert12Months(user);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
             Scene homeScene = new Scene(fxmlLoader.load());
@@ -78,5 +83,27 @@ public class RegisterController {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Error loading the home screen", AlertType.ERROR);
         }
+    }
+
+    //Method to go back to the login screen
+    @FXML
+    private void onBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            Scene registerScene = new Scene(fxmlLoader.load());
+
+            Stage stage = (Stage) backButton.getScene().getWindow();
+
+            stage.close();
+
+            Stage registerStage = new Stage();
+            registerStage.setScene(registerScene);
+            registerStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "An error occurred", AlertType.ERROR);
+        }
+
     }
 }

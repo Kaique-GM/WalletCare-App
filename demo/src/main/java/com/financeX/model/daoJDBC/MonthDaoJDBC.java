@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import com.financeX.model.dao.MonthDao;
 import com.financeX.services.db.DB;
 import com.financeX.services.db.DbException;
+import com.financeX.utils.Alerts;
+
+import javafx.scene.control.Alert.AlertType;
 
 public class MonthDaoJDBC implements MonthDao {
 
@@ -33,8 +36,10 @@ public class MonthDaoJDBC implements MonthDao {
 
             if (rs.next()) {
                 return rs.getInt("id_month");
+            } else {
+                Alerts.showAlert("Error", null, "No month found for the year " + year, AlertType.ERROR);
+                return null;
             }
-            return null;
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {

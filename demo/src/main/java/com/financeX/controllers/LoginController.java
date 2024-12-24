@@ -32,6 +32,7 @@ public class LoginController {
     @FXML
     private Button registerButton;
 
+    // Method to login
     @FXML
     private void onLogin(ActionEvent event) {
         String username = usernameField.getText();
@@ -48,6 +49,8 @@ public class LoginController {
             Boolean passwordMatches = service.passwordMatches(username, password);
 
             if (userExists && passwordMatches) {
+
+                //Create the user Session
                 Session session = Session.getInstance();
                 session.setUsername(username);
                 session.setUserID(service.findIdByUsername(username));
@@ -78,8 +81,9 @@ public class LoginController {
         }
     }
 
+    // Method to Register a User
     @FXML
-    private void OnRegister(ActionEvent event) {
+    private void onRegister(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/register.fxml"));
             Scene registerScene = new Scene(fxmlLoader.load());

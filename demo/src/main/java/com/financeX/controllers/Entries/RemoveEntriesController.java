@@ -1,6 +1,7 @@
 package com.financeX.controllers.Entries;
 
 import com.financeX.model.entities.Income;
+import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.IncomeService;
 import com.financeX.services.Session;
 import com.financeX.utils.Alerts;
@@ -17,7 +18,7 @@ public class RemoveEntriesController {
 
     private IncomeService service = new IncomeService();
     private Session session;
-    private ObservableList<Income> incomeList;
+    private ObservableList<FinancialRecord> incomeList;
 
     @FXML
     private TextField incomeIdField;
@@ -32,7 +33,7 @@ public class RemoveEntriesController {
         this.session = session;
     }
 
-    public void setIncomeList(ObservableList<Income> incomeList) {
+    public void setIncomeList(ObservableList<FinancialRecord> incomeList) {
         this.incomeList = incomeList;
     }
 
@@ -49,8 +50,8 @@ public class RemoveEntriesController {
 
             service.delete(userId, income_id);
 
-            Income incomeToRemove = null;
-            for (Income income : incomeList) {
+            FinancialRecord incomeToRemove = null;
+            for (FinancialRecord income : incomeList) {
                 if (income.getId() == income_id) {
                     incomeToRemove = income;
                     break;

@@ -180,6 +180,35 @@ public class UserDaoJDBC implements UserDao {
 
     }
 
+    @Override
+    public void insertYear(Integer year, Integer userId) {
+        PreparedStatement st = null;
+        String sql = "INSERT INTO months (month_name, yr, id_user) VALUES (?, ?, ?)";
+
+        int user_id = userId;
+        String months[] = { "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December" };
+
+        try {
+            for (String month : months) {
+                st = conn.prepareStatement(sql);
+
+                st.setString(1, month);
+                st.setInt(2, year);
+                st.setInt(3, user_id);
+
+                st.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+
+        } finally {
+            DB.closeStatement(st);
+        }
+
+    }
+
     private User instantiateUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));

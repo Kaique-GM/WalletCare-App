@@ -3,6 +3,7 @@ package com.financeX.controllers.Expenses;
 import java.math.BigDecimal;
 
 import com.financeX.model.entities.Expenses;
+import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.ExpenseService;
 import com.financeX.services.MonthService;
 import com.financeX.services.Session;
@@ -20,7 +21,7 @@ public class AddVariableController {
 
     private ExpenseService service = new ExpenseService();
     private MonthService service2 = new MonthService();
-    private ObservableList<Expenses> expenseList;
+    private ObservableList<FinancialRecord> expenseList;
     private String currentMonth;
     private Session session;
     private Integer year;
@@ -49,7 +50,7 @@ public class AddVariableController {
         this.year = year;
     }
 
-    public void setExpensesList(ObservableList<Expenses> expensesList) {
+    public void setExpensesList(ObservableList<FinancialRecord> expensesList) {
         this.expenseList = expensesList;
     }
 

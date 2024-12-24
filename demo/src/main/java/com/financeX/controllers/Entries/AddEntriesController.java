@@ -3,6 +3,7 @@ package com.financeX.controllers.Entries;
 import java.math.BigDecimal;
 
 import com.financeX.model.entities.Income;
+import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.IncomeService;
 import com.financeX.services.MonthService;
 import com.financeX.services.Session;
@@ -23,7 +24,7 @@ public class AddEntriesController {
     private String currentMonth;
     private Session session;
     private Integer year;
-    private ObservableList<Income> incomeList;
+    private ObservableList<FinancialRecord> incomeList;
 
     @FXML
     private TextField descriptionField;
@@ -49,7 +50,7 @@ public class AddEntriesController {
         this.year = year;
     }
 
-    public void setIncomeList(ObservableList<Income> incomeList) {
+    public void setIncomeList(ObservableList<FinancialRecord> incomeList) {
         this.incomeList = incomeList;
     }
 

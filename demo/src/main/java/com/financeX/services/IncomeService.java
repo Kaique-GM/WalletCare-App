@@ -25,4 +25,5 @@ public class IncomeService {
     public List<Income> getIncomes(Integer userId, Integer monthId){
         return dao.getIncomes(userId, monthId);
     }
+    
 }
