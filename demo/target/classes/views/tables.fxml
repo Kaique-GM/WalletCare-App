@@ -22,7 +22,7 @@
             </Label>
             <Label fx:id="categoryName" alignment="CENTER" prefHeight="27.0" prefWidth="162.0" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Category">
                 <HBox.margin>
-                    <Insets left="360.0" />
+                    <Insets left="380.0" />
                 </HBox.margin>
             </Label>
             <Label fx:id="labelYear" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Year">
@@ -36,30 +36,39 @@
     <!-- Left Menu -->
     <left>
         <VBox fx:id="menuPane" spacing="15" style="-fx-background-color: #388E3C; -fx-padding: 20;" visible="true">
-            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Main Menu" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Main Menu">
+            <VBox.margin>
+               <Insets left="32.0" />
+            </VBox.margin></Label>
 
             <!-- Button for Overview -->
-            <Button fx:id="btOverview" onAction="#handleOverview" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="🏠 Overview" />
+            <Button fx:id="btOverview" onAction="#handleOverview" prefHeight="53.0" prefWidth="167.0" style="-fx-text-fill: white; -fx-background-color: #4CAF50; -fx-font-size: 24px;" text="🏠" />
 
             <!-- Button for Settings -->
-            <Button fx:id="btLogout" onAction="#onLogout" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="🚪 Logout" />
+            <Button fx:id="btLogout" onAction="#onLogout" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="🚪 Logout" />
 
-            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Change View" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Change View">
+            <VBox.margin>
+               <Insets left="26.0" />
+            </VBox.margin></Label>
 
             <!-- Button for changing Month -->
-            <Button onAction="#handleMonthChange" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📆 Change Month" />
+            <Button onAction="#handleMonthChange" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="📆 Change Month" />
 
             <!-- Button for changing Year -->
-            <Button onAction="#handleYearChange" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📆 Change Year" />
-         <Button onAction="#handleNewYear" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📆 Add new Year" />
+            <Button onAction="#handleYearChange" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="📆 Change Year" />
+            <Button onAction="#handleNewYear" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="📆 Add new Year" />
 
             <!-- New Section for Entries, Fixed Expenses, and Variable Expenses -->
-            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Expense Categories" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Expense Categories">
+            <VBox.margin>
+               <Insets left="8.0" />
+            </VBox.margin></Label>
 
             <!-- Buttons for switching between Entries, Fixed Expenses, and Variable Expenses -->
-            <Button onAction="#handleIncomeView" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📄 Income" />
-            <Button onAction="#handleFixedExpensesView" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="💰 Fixed Expenses" />
-            <Button onAction="#handleVariableExpensesView" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="💵 Variable Expenses" />
+            <Button onAction="#handleIncomeView" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="📄 Income" />
+            <Button onAction="#handleFixedExpensesView" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="💰 Fixed Expenses" />
+            <Button onAction="#handleVariableExpensesView" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="💵 Variable Expenses" />
         </VBox>
     </left>
 
@@ -68,20 +77,20 @@
         <VBox fx:id="operationPane" spacing="15" style="-fx-background-color: #388E3C; -fx-padding: 20;" visible="true">
             <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Income" />
 
-            <Button onAction="#handleAddIncome" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="➕ Add Income" />
-            <Button onAction="#handleRemoveIncome" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="➖ Remove Income" />
-            <Button onAction="#handleEditIncome" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="✏ Edit Income" />
+            <Button onAction="#handleAddIncome" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="➕ Add Income" />
+            <Button onAction="#handleRemoveIncome" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="➖ Remove Income" />
+            <Button onAction="#handleEditIncome" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="✏ Edit Income" />
 
             <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Fixed Expense" />
 
-            <Button onAction="#handleAddFixedExpense" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="➕ Add Fixed Expense" />
-            <Button onAction="#handleRemoveFixedExpense" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="➖ Remove Fixed Expense" />
-            <Button onAction="#handleEditFixedExpense" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="✏ Edit Fixed Expense" />
-         <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Variable Expense" />
+            <Button onAction="#handleAddFixedExpense" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="➕ Add Fixed Expense" />
+            <Button onAction="#handleRemoveFixedExpense" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="➖ Remove Fixed Expense" />
+            <Button onAction="#handleEditFixedExpense" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="✏ Edit Fixed Expense" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Variable Expense" />
 
-            <Button onAction="#handleAddVariableExpense" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="➕ Add Variable Expense" />
-            <Button onAction="#handleRemoveVariableExpense" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="➖ Remove Variable Expense" />
-            <Button onAction="#handleEditVariableExpense" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="✏ Edit Variable Expense" />
+            <Button onAction="#handleAddVariableExpense" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="➕ Add Variable Expense" />
+            <Button onAction="#handleRemoveVariableExpense" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="➖ Remove Variable Expense" />
+            <Button onAction="#handleEditVariableExpense" prefWidth="167.0" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-background-color: #4CAF50;" text="✏ Edit Variable Expense" />
         </VBox>
     </right>
 
@@ -90,10 +99,10 @@
         <VBox fx:id="mainContent" spacing="20" style="-fx-padding: 20; -fx-background-color: #E8F5E9;">
             <HBox alignment="CENTER" spacing="15">
                 <!-- Table View for Data -->
-                <VBox alignment="CENTER" spacing="10">
+                <VBox alignment="CENTER" prefHeight="570.0" spacing="10" style="-fx-pref-width: 850;">
                     <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="📊 Monthly Data" />
-               <Label fx:id="monthName" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="January" />
-                    <TableView fx:id="dataTable" style="-fx-pref-width: 800; -fx-pref-height: 400;">
+                    <Label fx:id="monthName" alignment="CENTER" prefHeight="44.0" prefWidth="62.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="January" />
+                    <TableView fx:id="dataTable" prefHeight="500.0" style="-fx-pref-width: 800; -fx-pref-height: 500;">
                         <columns>
                             <TableColumn fx:id="idColumn" prefWidth="100" text="ID">
                                 <cellValueFactory>

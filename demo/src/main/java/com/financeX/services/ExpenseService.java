@@ -22,7 +22,12 @@ public class ExpenseService {
         dao.update(userId, obj, expense_id);
     }
 
-    public List<Expenses> getExpenses(Integer userId, Integer monthId, Integer category){
+    public List<Expenses> getExpenses(Integer userId, Integer monthId, Integer category) {
         return dao.getExpenses(userId, monthId, category);
     }
+
+    public List<Expenses> getAllExpenses(Integer userId, Integer category, Integer year) {
+        return dao.getAllExpenses(userId, category, year);
+    }
+
 }

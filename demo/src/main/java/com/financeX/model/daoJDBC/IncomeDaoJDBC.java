@@ -112,7 +112,7 @@ public class IncomeDaoJDBC implements IncomeDao {
 
             rs = st.executeQuery();
             List<Income> incomes = new ArrayList<>();
-            
+
             while (rs.next()) {
                 int id = rs.getInt("id_income");
                 String description = rs.getString("description_i");
@@ -125,6 +125,41 @@ public class IncomeDaoJDBC implements IncomeDao {
                 income.setDescription(description);
                 income.setValue(value);
                 income.setDate(date);
+
+                incomes.add(income);
+            }
+
+            return incomes;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
+    @Override
+    public List<Income> getAllIncomes(Integer userId, Integer year) {
+        String sql = "SELECT * FROM incomes WHERE id_user = ? AND YEAR(income_date) = ?";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.setInt(2, year);
+
+            rs = st.executeQuery();
+            List<Income> incomes = new ArrayList<>();
+
+            while (rs.next()) {
+
+                BigDecimal value = rs.getBigDecimal("value_i");
+
+                Income income = new Income();
+
+                income.setValue(value);
 
                 incomes.add(income);
             }

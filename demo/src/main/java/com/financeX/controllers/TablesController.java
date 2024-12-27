@@ -98,9 +98,21 @@ public class TablesController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        valueColumn.setCellFactory(column -> new javafx.scene.control.TableCell<FinancialRecord, BigDecimal>() {
+            @Override
+            protected void updateItem(BigDecimal item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText("$" + item.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+                }
+            }
+        });
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         dataTable.setItems(financialList);
+
     }
 
     public void loadIncomes() {
@@ -150,15 +162,20 @@ public class TablesController {
 
     @FXML
     private void handleOverview() {
+        HomeController homeController;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
             Scene homeScene = new Scene(fxmlLoader.load());
+
+            homeController = fxmlLoader.getController();
+            homeController.setYear(year);
 
             Stage stage = (Stage) btOverview.getScene().getWindow();
             stage.close();
 
             Stage homeStage = new Stage();
             homeStage.setScene(homeScene);
+            homeStage.setMaximized(true);
             homeStage.show();
 
         } catch (IOException e) {

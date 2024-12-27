@@ -9,7 +9,10 @@ public interface IncomeDao {
 
     void delete(Integer userId, Integer income_id);
 
-    void update(Integer userId, Income obj,Integer income_id);
+    void update(Integer userId, Income obj, Integer income_id);
 
     List<Income> getIncomes(Integer userId, Integer monthId);
+
+    List<Income> getAllIncomes(Integer userId, Integer year);
+
 }

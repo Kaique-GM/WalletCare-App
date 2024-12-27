@@ -15,43 +15,57 @@
     <!-- Top Header -->
     <top>
         <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1B5A2A; -fx-padding: 15;">
-            <Button onAction="#toggleMenu" style="-fx-text-fill: white; -fx-font-size: 14; -fx-background-color: #388E3C;" text="☰ Menu" />
-            <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="WalletCare">
+            <Button onAction="#toggleMenu" prefHeight="26.0" prefWidth="89.0" style="-fx-text-fill: white; -fx-font-size: 14; -fx-background-color: #388E3C;" text="☰ Menu" />
+            <Label prefHeight="27.0" prefWidth="104.0" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="WalletCare">
+                <HBox.margin>
+                    <Insets left="5.0" />
+                </HBox.margin>
+            </Label>
+            <Label fx:id="" alignment="CENTER" prefHeight="27.0" prefWidth="332.0" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Monthly Income &amp; Expense Summary">
+                <HBox.margin>
+                    <Insets left="450.0" />
+                </HBox.margin>
+                <HBox.margin>
+                    <Insets left="450.0" />
+                </HBox.margin>
+                <padding>
+                    <Insets right="10.0" />
+                </padding>
+            </Label>
+            <Label fx:id="labelYear" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Year">
             <HBox.margin>
-               <Insets left="5.0" />
+               <Insets left="450.0" />
             </HBox.margin></Label>
-         <Label fx:id="labelYear" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Year">
-            <HBox.margin>
-               <Insets left="1000.0" />
-            </HBox.margin>
-         </Label>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
         </HBox>
     </top>
 
     <!-- Left Menu -->
     <left>
         <VBox fx:id="menuPane" spacing="15" style="-fx-background-color: #388E3C; -fx-padding: 20;" visible="true">
+
+            <!-- Rótulo para o menu principal -->
             <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Main Menu" />
-            
-            <!-- Button for Overview -->
-            <Button onAction="#handleOverview" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="🏠 Overview" />
-            
-            <!-- Button for Settings -->
-            <Button fx:id="btLogout" onAction="#onLogout" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="🚪 Logout" />
 
+            <!-- Botão Overview -->
+            <Button alignment="CENTER" maxWidth="Infinity" onAction="#handleOverview" style="-fx-text-fill: white; -fx-background-color: #4CAF50; -fx-font-size: 16px;" text="🏠 Overview" />
+
+            <!-- Botão Logout -->
+            <Button fx:id="btLogout" alignment="CENTER" maxWidth="Infinity" onAction="#onLogout" style="-fx-text-fill: white; -fx-background-color: #4CAF50; -fx-font-size: 16px;" text="🚪 Logout" />
+
+            <!-- Rótulo para alteração de visualizações -->
             <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Change View" />
-            
-            <!-- Button for changing Month -->
-            <Button onAction="#handleMonthChange" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📆 Change Month" />
-            
-            <!-- Button for changing Year -->
-            <Button onAction="#handleYearChange" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📆 Change Year" />
 
-            <!-- Button for Tables Screen -->
-            <Button fx:id="btnTablesScreen" onAction="#handleTablesScreen" style="-fx-text-fill: white; -fx-background-color: #4CAF50;" text="📊 View Tables" />
+            <!-- Botão para mudar o mês -->
+            <Button alignment="CENTER" maxWidth="Infinity" onAction="#handleMonthChange" style="-fx-text-fill: white; -fx-background-color: #4CAF50; -fx-font-size: 16px;" text="📆 Change Month" />
+
+            <!-- Botão para mudar o ano -->
+            <Button alignment="CENTER" maxWidth="Infinity" onAction="#handleYearChange" style="-fx-text-fill: white; -fx-background-color: #4CAF50; -fx-font-size: 16px;" text="📆 Change Year" />
+
+            <!-- Botão para a tela de tabelas -->
+            <Button fx:id="btnTablesScreen" alignment="CENTER" maxWidth="Infinity" onAction="#handleTablesScreen" style="-fx-text-fill: white; -fx-background-color: #4CAF50; -fx-font-size: 16px;" text="📊 View Tables" />
         </VBox>
     </left>
 
@@ -60,17 +74,46 @@
         <VBox fx:id="mainContent" spacing="20" style="-fx-padding: 20; -fx-background-color: #E8F5E9;">
             <HBox alignment="CENTER" spacing="15">
                 <!-- Pie Chart -->
-                <VBox alignment="CENTER" spacing="10">
-                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="🍕 Expenses Breakdown" />
-                    <PieChart fx:id="expensesPieChart" style="-fx-pref-width: 400; -fx-pref-height: 400;" />
+                <VBox fx:id="" alignment="CENTER" spacing="10" style="-fx-pref-width: 600; -fx-pref-height: 600;">
+                    <Label alignment="CENTER" style="-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="🍕" />
+                    <PieChart fx:id="pieChart" style="-fx-pref-width: 600; -fx-pref-height: 600;" />
                 </VBox>
+            <VBox prefHeight="682.0" prefWidth="127.0">
+               <children>
+                      <Label fx:id="labelMonth" alignment="CENTER" prefHeight="26.0" prefWidth="130.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="Month" visible="false">
+                     <VBox.margin>
+                        <Insets top="300.0" />
+                     </VBox.margin></Label>
+                  <Label fx:id="totalLabel" alignment="CENTER" prefHeight="26.0" prefWidth="162.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="Balance: $0.00">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
 
                 <!-- Bar Chart -->
                 <VBox alignment="CENTER" spacing="10">
-                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="📊 Monthly Income and Expenses" />
-                    <BarChart fx:id="revenueBarChart" style="-fx-pref-width: 500; -fx-pref-height: 400;">
+                    <Label alignment="CENTER" style="-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="📊" />
+                    <BarChart fx:id="monthlyBarChart1" style="-fx-pref-width: 500; -fx-pref-height: 200;" visible="true">
                         <xAxis>
                             <CategoryAxis fx:id="barXAxis" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis />
+                        </yAxis>
+                    </BarChart>
+                    <BarChart fx:id="monthlyBarChart2" style="-fx-pref-width: 500; -fx-pref-height: 200;">
+                        <xAxis>
+                            <CategoryAxis fx:id="barXAxis1" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis />
+                        </yAxis>
+                    </BarChart>
+                    <BarChart fx:id="monthlyBarChart3" style="-fx-pref-width: 500; -fx-pref-height: 200;" visible="true">
+                        <xAxis>
+                            <CategoryAxis fx:id="barXAxis2" />
                         </xAxis>
                         <yAxis>
                             <NumberAxis />

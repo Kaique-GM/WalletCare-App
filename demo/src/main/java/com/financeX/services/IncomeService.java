@@ -22,8 +22,12 @@ public class IncomeService {
         dao.update(userId, obj, income_id);
     }
 
-    public List<Income> getIncomes(Integer userId, Integer monthId){
+    public List<Income> getIncomes(Integer userId, Integer monthId) {
         return dao.getIncomes(userId, monthId);
     }
-    
+
+    public List<Income> getAllIncomes(Integer userId, Integer year){
+        return dao.getAllIncomes(userId, year);
+    }
+
 }

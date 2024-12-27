@@ -11,6 +11,8 @@ public interface ExpenseDao {
 
     void update(Integer userId, Expenses obj, Integer Expense_id);
 
-    List<Expenses> getExpenses(Integer userId, Integer monthId,Integer category);
+    List<Expenses> getExpenses(Integer userId, Integer monthId, Integer category);
+
+    List<Expenses> getAllExpenses(Integer userId, Integer category, Integer year);
 
 }

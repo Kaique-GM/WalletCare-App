@@ -100,7 +100,7 @@ public class ExpenseDaoJDBC implements ExpenseDao {
 
     }
 
-  @Override
+    @Override
     public List<Expenses> getExpenses(Integer userId, Integer monthId, Integer category) {
         String sql = "SELECT * FROM expenses WHERE id_user = ? AND id_month = ? AND id_category = ?";
         PreparedStatement st = null;
@@ -114,7 +114,7 @@ public class ExpenseDaoJDBC implements ExpenseDao {
 
             rs = st.executeQuery();
             List<Expenses> expenses = new ArrayList<>();
-            
+
             while (rs.next()) {
                 int id = rs.getInt("id_expenses");
                 String description = rs.getString("description_e");
@@ -127,6 +127,42 @@ public class ExpenseDaoJDBC implements ExpenseDao {
                 expense.setDescription(description);
                 expense.setValue(value);
                 expense.setDate(date);
+
+                expenses.add(expense);
+            }
+
+            return expenses;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
+    @Override
+    public List<Expenses> getAllExpenses(Integer userId, Integer category, Integer year) {
+        String sql = "SELECT * FROM expenses WHERE id_user = ? AND id_category = ? AND YEAR(expenses_date) = ?";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.setInt(2, category);
+            st.setInt(3, year);
+
+
+            rs = st.executeQuery();
+            List<Expenses> expenses = new ArrayList<>();
+
+            while (rs.next()) {
+                BigDecimal value = rs.getBigDecimal("value_e");
+
+                Expenses expense = new Expenses();
+
+                expense.setValue(value);
 
                 expenses.add(expense);
             }

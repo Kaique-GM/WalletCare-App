@@ -64,6 +64,7 @@ public class LoginController {
 
                 Stage homeStage = new Stage();
                 homeStage.setScene(homeScene);
+                homeStage.setMaximized(true);
                 homeStage.show();
             }
 
