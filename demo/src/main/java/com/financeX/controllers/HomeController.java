@@ -133,6 +133,8 @@ public class HomeController {
 
             if (controller.isOkClicked()) {
                 labelMonth.setText(controller.getMonth());
+            } else {
+                return;
             }
 
         } catch (IOException e) {
@@ -207,22 +209,22 @@ public class HomeController {
 
             YearChangeController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setYear(year);
 
             dialogStage.showAndWait();
 
             if (controller.isOkClicked()) {
                 year = controller.getYear();
                 labelYear.setText(year.toString());
+            } else {
+                return;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
             Alerts.showAlert("Error", null, "Failed to load the year change dialog.", AlertType.ERROR);
         }
-        configurePieChartHome();
-        configuremonthlyBarChart1();
-        configuremonthlyBarChart2();
-        configuremonthlyBarChart3();
+        handleOverview();
     }
 
     @FXML
@@ -248,6 +250,73 @@ public class HomeController {
 
         }
 
+    }
+
+    @FXML
+    private void onAddNewYear() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/addYear.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add new Year");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(labelYear.getScene().getWindow());
+            dialogStage.setScene(scene);
+
+            AddYearController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setUserId(userID);
+            controller.setYear(year);
+
+            dialogStage.showAndWait();
+
+            if (controller.isOkClicked()) {
+                year = controller.getYear();
+                labelYear.setText(year.toString());
+            } else {
+                return;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Failed to load the Add new Year Screen.", AlertType.ERROR);
+        }
+        configurePieChartHome();
+        configuremonthlyBarChart1();
+        configuremonthlyBarChart2();
+        configuremonthlyBarChart3();
+    }
+
+    @FXML
+    private void onAddAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/add.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(labelYear.getScene().getWindow());
+            dialogStage.setScene(scene);
+
+            AddController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setUserId(userID);
+            controller.setYear(year);
+
+            dialogStage.showAndWait();
+
+            if (controller.isOkClicked()) {
+                handleOverview();
+            } else {
+                return;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("Error", null, "Failed to load the add dialog.", AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -286,6 +355,8 @@ public class HomeController {
     }
 
     private void configurePieChartHome() {
+        pieChart.getData().clear();
+
         List<Income> incomes = incomeService.getAllIncomes(userID, year);
         List<Expenses> fixedExpenses = expenseService.getAllExpenses(userID, 2, year);
         List<Expenses> variableExpenses = expenseService.getAllExpenses(userID, 3, year);
@@ -300,14 +371,13 @@ public class HomeController {
 
         Double total = totalIncome - totalFixedExp - totalVariableExp;
 
-        pieChart.getData().clear();
-
         pieChart.getData().addAll(
                 new PieChart.Data("Income: $" + totalIncome, totalIncome),
-                new PieChart.Data("Fixed Expenses: $" + totalFixedExp, totalFixedExp),
-                new PieChart.Data("Variable Expenses: $" + totalVariableExp, totalVariableExp));
+                new PieChart.Data("Fixed Exp: $" + totalFixedExp, totalFixedExp),
+                new PieChart.Data("Variable Exp: $" + totalVariableExp, totalVariableExp));
 
         totalLabel.setText("Balance: $" + total);
+
     }
 
     private void configuremonthlyBarChart1() {

@@ -101,7 +101,7 @@
                 <!-- Table View for Data -->
                 <VBox alignment="CENTER" prefHeight="570.0" spacing="10" style="-fx-pref-width: 850;">
                     <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="📊 Monthly Data" />
-                    <Label fx:id="monthName" alignment="CENTER" prefHeight="44.0" prefWidth="62.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="January" />
+                    <Label fx:id="monthName" alignment="CENTER" prefHeight="37.0" prefWidth="78.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="January" />
                     <TableView fx:id="dataTable" prefHeight="500.0" style="-fx-pref-width: 800; -fx-pref-height: 500;">
                         <columns>
                             <TableColumn fx:id="idColumn" prefWidth="100" text="ID">

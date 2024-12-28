@@ -31,6 +31,9 @@ public class MonthChangeController {
         monthComboBox.setItems(FXCollections.observableArrayList(
                 "January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"));
+
+        monthComboBox.getSelectionModel().select(0);
+
     }
 
     @FXML
