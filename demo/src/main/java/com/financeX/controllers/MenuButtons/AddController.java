@@ -1,6 +1,5 @@
-package com.financeX.controllers;
+package com.financeX.controllers.MenuButtons;
 
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 
 import com.financeX.model.entities.Expenses;
@@ -10,7 +9,6 @@ import com.financeX.services.IncomeService;
 import com.financeX.services.MonthService;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -22,7 +20,6 @@ public class AddController {
     private boolean okClicked = false;
     private String month;
     private String typeString;
-    private Integer typeInt;
     private Integer userId;
     private Integer monthId;
     private Integer year;

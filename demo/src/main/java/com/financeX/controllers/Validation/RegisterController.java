@@ -1,4 +1,4 @@
-package com.financeX.controllers;
+package com.financeX.controllers.Validation;
 
 import java.io.IOException;
 
@@ -35,8 +35,7 @@ public class RegisterController {
     @FXML
     private Button backButton;
 
-
-    //Method to register a new user in the database
+    // Method to register a new user in the database
     @FXML
     private void onRegister(ActionEvent event) {
         String username = usernameField.getText();
@@ -61,8 +60,8 @@ public class RegisterController {
 
             service.saveOrUpdate(user);
             service.insert12Months(user);
-            
-            //Create the user Session
+
+            // Create the user Session
             Session session = Session.getInstance();
             session.setUsername(username);
             session.setUserID(service.findIdByUsername(username));
@@ -85,7 +84,7 @@ public class RegisterController {
         }
     }
 
-    //Method to go back to the login screen
+    // Method to go back to the login screen
     @FXML
     private void onBack(ActionEvent event) {
         try {

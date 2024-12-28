@@ -1,4 +1,4 @@
-package com.financeX.controllers;
+package com.financeX.controllers.MenuButtons;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

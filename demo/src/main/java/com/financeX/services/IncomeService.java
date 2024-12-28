@@ -26,7 +26,7 @@ public class IncomeService {
         return dao.getIncomes(userId, monthId);
     }
 
-    public List<Income> getAllIncomes(Integer userId, Integer year){
+    public List<Income> getAllIncomes(Integer userId, Integer year) {
         return dao.getAllIncomes(userId, year);
     }
 

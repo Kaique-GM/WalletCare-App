@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.HomeController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.MainViews.HomeController">
     <!-- Top Header -->
     <top>
         <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1B5A2A; -fx-padding: 15;">
@@ -92,7 +92,7 @@
                 </VBox>
             <VBox prefHeight="682.0" prefWidth="158.0">
                <children>
-                      <Label fx:id="labelMonth" alignment="CENTER" prefHeight="26.0" prefWidth="130.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="Month" visible="false">
+                      <Label fx:id="labelMonth" alignment="CENTER" prefHeight="26.0" prefWidth="163.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B5A2A;" text="Month" visible="false">
                      <VBox.margin>
                         <Insets top="300.0" />
                      </VBox.margin></Label>

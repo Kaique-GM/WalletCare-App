@@ -20,7 +20,7 @@ public class UpdateExpensesController {
 
     private ExpenseService service = new ExpenseService();
     private Session session;
-   private ObservableList<FinancialRecord> expenseFixedList;
+    private ObservableList<FinancialRecord> expenseFixedList;
     private ObservableList<FinancialRecord> expenseVariableList;
 
     @FXML

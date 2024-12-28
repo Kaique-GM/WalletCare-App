@@ -153,7 +153,6 @@ public class ExpenseDaoJDBC implements ExpenseDao {
             st.setInt(2, category);
             st.setInt(3, year);
 
-
             rs = st.executeQuery();
             List<Expenses> expenses = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package com.financeX.controllers.Expenses;
 
-import com.financeX.model.entities.Expenses;
 import com.financeX.model.entities.interfaces.FinancialRecord;
 import com.financeX.services.ExpenseService;
 import com.financeX.services.Session;

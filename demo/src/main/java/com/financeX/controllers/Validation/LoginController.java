@@ -1,4 +1,4 @@
-package com.financeX.controllers;
+package com.financeX.controllers.Validation;
 
 import java.io.IOException;
 
@@ -50,7 +50,7 @@ public class LoginController {
 
             if (userExists && passwordMatches) {
 
-                //Create the user Session
+                // Create the user Session
                 Session session = Session.getInstance();
                 session.setUsername(username);
                 session.setUserID(service.findIdByUsername(username));

@@ -1,4 +1,4 @@
-package com.financeX.controllers;
+package com.financeX.controllers.MenuButtons;
 
 import com.financeX.services.UserService;
 

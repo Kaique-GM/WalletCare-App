@@ -40,6 +40,7 @@ public class UpdateEntriesController {
     public void setSession(Session session) {
         this.session = session;
     }
+
     public void setIncomeList(ObservableList<FinancialRecord> incomeList) {
         this.incomeList = incomeList;
     }

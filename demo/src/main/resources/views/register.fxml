@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.RegisterController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.Validation.RegisterController">
     <!-- Top Header -->
     <top>
         <HBox alignment="CENTER" style="-fx-background-color: #1B5A2A; -fx-padding: 15;">

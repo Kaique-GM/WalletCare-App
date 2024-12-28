@@ -1,10 +1,14 @@
-package com.financeX.controllers;
+package com.financeX.controllers.MainViews;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.financeX.controllers.MenuButtons.AddController;
+import com.financeX.controllers.MenuButtons.AddYearController;
+import com.financeX.controllers.MenuButtons.MonthChangeController;
+import com.financeX.controllers.MenuButtons.YearChangeController;
 import com.financeX.model.entities.Expenses;
 import com.financeX.model.entities.Income;
 import com.financeX.model.entities.interfaces.FinancialRecord;

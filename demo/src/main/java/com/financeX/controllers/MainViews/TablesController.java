@@ -1,4 +1,4 @@
-package com.financeX.controllers;
+package com.financeX.controllers.MainViews;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,6 +12,9 @@ import com.financeX.controllers.Expenses.AddFixedExpensesController;
 import com.financeX.controllers.Expenses.AddVariableController;
 import com.financeX.controllers.Expenses.RemoveExpensesController;
 import com.financeX.controllers.Expenses.UpdateExpensesController;
+import com.financeX.controllers.MenuButtons.AddYearController;
+import com.financeX.controllers.MenuButtons.MonthChangeController;
+import com.financeX.controllers.MenuButtons.YearChangeController;
 import com.financeX.model.entities.Expenses;
 import com.financeX.model.entities.Income;
 import com.financeX.model.entities.interfaces.FinancialRecord;

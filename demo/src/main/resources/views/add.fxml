@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="462.0" prefWidth="246.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.AddController">
+<BorderPane prefHeight="462.0" prefWidth="246.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financeX.controllers.MenuButtons.AddController">
     <!-- Top Header -->
     <top>
         <HBox alignment="CENTER" style="-fx-background-color: #1B5A2A; -fx-padding: 15;">

@@ -11,5 +11,5 @@ public interface FinancialRecord {
     BigDecimal getValue();
 
     Date getDate();
-    
+
 }
